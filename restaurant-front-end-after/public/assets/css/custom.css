@@ -2879,3 +2879,13 @@
     color: #ff5252 !important;
     transform: translateX(4px);
 }
+
+/* Compact Portion Selection Buttons */
+.portion-btn {
+    padding: 4px 12px !important;
+    height: 28px !important;
+    line-height: 18px !important;
+    font-size: 10px !important;
+    min-width: 0 !important;
+    border-radius: 20px !important;
+}

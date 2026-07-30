@@ -335,21 +335,31 @@ export const ShopSingle: React.FC = () => {
                         <h5 style={{ fontFamily: 'Raleway', fontWeight: 'bold', fontSize: '11px', textTransform: 'uppercase', color: '#222', letterSpacing: '1px', marginBottom: '10px' }}>
                           Select Portion
                         </h5>
-                        <div style={{ display: 'flex', gap: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'nowrap' }}>
                           {portions.map((p) => (
                             <button
                               key={p.id}
                               onClick={() => setSelectedPortion(p)}
-                              className={`btn btn--sm ${selectedPortion?.id === p.id ? 'btn--secondary' : ''}`}
+                              className={`btn portion-btn ${selectedPortion?.id === p.id ? 'btn--secondary' : ''}`}
                               style={{
                                 border: '1px solid #c59d5f',
                                 color: selectedPortion?.id === p.id ? '#fff' : '#c59d5f',
                                 backgroundColor: selectedPortion?.id === p.id ? '#c59d5f' : 'transparent',
                                 textTransform: 'uppercase',
-                                padding: '8px 16px',
-                                fontSize: '11px',
+                                padding: '4px 12px',
+                                height: '28px',
+                                lineHeight: '18px',
+                                fontSize: '10px',
                                 fontWeight: 'bold',
-                                borderRadius: '25px',
+                                borderRadius: '20px',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                minWidth: 'auto',
+                                boxShadow: selectedPortion?.id === p.id ? '0 2px 8px rgba(197, 157, 95, 0.4)' : 'none',
+                                transition: 'all 0.2s ease',
+                                margin: 0,
                               }}
                             >
                               {p.name}
@@ -458,7 +468,28 @@ export const ShopSingle: React.FC = () => {
                         </div>
                       </div>
 
-                      <button onClick={handleAddToCart} className="btn btn--primary" style={{ height: '40px', padding: '0 30px', backgroundColor: '#c59d5f', border: '2px solid #c59d5f', color: '#fff', borderRadius: '25px', textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '1px', fontSize: '11px', cursor: 'pointer' }}>
+                      <button
+                        onClick={handleAddToCart}
+                        className="btn btn--primary"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          height: '40px',
+                          lineHeight: '40px',
+                          padding: '0 30px',
+                          backgroundColor: '#c59d5f',
+                          border: '2px solid #c59d5f',
+                          color: '#fff',
+                          borderRadius: '25px',
+                          textTransform: 'uppercase',
+                          fontWeight: 'bold',
+                          letterSpacing: '1px',
+                          fontSize: '11px',
+                          cursor: 'pointer',
+                          boxSizing: 'border-box'
+                        }}
+                      >
                         Add To Cart
                       </button>
                     </div>
