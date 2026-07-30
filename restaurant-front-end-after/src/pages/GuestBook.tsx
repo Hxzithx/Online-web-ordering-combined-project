@@ -166,7 +166,7 @@ export const GuestBook: React.FC = () => {
                   <button 
                     type="submit" 
                     className="btn btn--secondary btn--block"
-                    style={{ backgroundColor: '#c59d5f', border: 'none', color: '#fff', padding: '14px', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 'bold', fontSize: '11px', borderRadius: '25px', cursor: 'pointer' }}
+                    style={{ backgroundColor: '#c59d5f', border: 'none', color: '#fff', padding: '5px', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 'bold', fontSize: '11px', borderRadius: '25px', cursor: 'pointer' }}
                   >
                     Post Review
                   </button>

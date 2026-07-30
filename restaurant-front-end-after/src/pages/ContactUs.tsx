@@ -137,7 +137,7 @@ export const ContactUs: React.FC = () => {
                   <button 
                     type="submit" 
                     className="btn btn--secondary"
-                    style={{ backgroundColor: '#c59d5f', border: 'none', color: '#fff', padding: '12px 30px', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 'bold', fontSize: '11px', borderRadius: '25px', cursor: 'pointer' }}
+                    style={{ backgroundColor: '#c59d5f', border: 'none', color: '#fff', padding: '4.5px 30px', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 'bold', fontSize: '11px', borderRadius: '25px', cursor: 'pointer' }}
                   >
                     Send Message
                   </button>

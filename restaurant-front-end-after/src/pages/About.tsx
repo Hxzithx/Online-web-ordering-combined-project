@@ -48,7 +48,7 @@ export const About: React.FC = () => {
                 Every steaks cut, fresh pasta noodles, and dessert sauce is prepared in-house by our master chefs using organic, local ingredients. We welcome you to experience our hospitality and dine in comfort.
               </p>
               <div style={{ marginTop: '30px' }}>
-                <Link to="/menu" className="btn btn--secondary" style={{ backgroundColor: '#c59d5f', color: '#fff', borderRadius: '25px', padding: '12px 30px', textTransform: 'uppercase', fontSize: '11px', letterSpacing: '1px', fontWeight: 'bold', textDecoration: 'none' }}>
+                <Link to="/menu" className="btn btn--secondary" style={{ backgroundColor: '#c59d5f', color: '#fff', borderRadius: '25px', padding: '4px 30px', textTransform: 'uppercase', fontSize: '11px', letterSpacing: '1px', fontWeight: 'bold', textDecoration: 'none' }}>
                   Explore Menu
                 </Link>
               </div>
