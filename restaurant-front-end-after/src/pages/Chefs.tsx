@@ -6,19 +6,19 @@ export const Chefs: React.FC = () => {
     {
       name: 'Chef Anthony Bourdain',
       role: 'Head Culinary Officer',
-      image: '/assets/images/shop/grid/1.jpg',
+      image: '/assets/images/sliders/slide-bg/1.jpg',
       bio: 'Over 20 years of experience in French cuisine and steak preparation techniques.'
     },
     {
       name: 'Chef Gordon Ramsay',
       role: 'Senior Sous Chef',
-      image: '/assets/images/shop/grid/2.jpg',
+      image: '/assets/images/sliders/slide-bg/2.jpg',
       bio: 'Master of pastas and signature wood-fired recipes.'
     },
     {
       name: 'Chef Alice Waters',
       role: 'Executive Pastry Artist',
-      image: '/assets/images/shop/grid/3.jpg',
+      image: '/assets/images/sliders/slide-bg/3.jpg',
       bio: 'Creates our molten lava melts and gourmet seasonal desserts.'
     }
   ];
@@ -28,7 +28,7 @@ export const Chefs: React.FC = () => {
       {/* Page Title */}
       <section id="page-title" className="page-title bg-overlay bg-parallax bg-overlay-gradient">
         <div className="bg-section">
-          <img src="/assets/images/page-title/6.jpg" alt="Background" />
+          <img src="/assets/images/sliders/slide-bg/2.jpg" alt="Background" />
         </div>
         <div className="container">
           <div className="row">

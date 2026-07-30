@@ -496,7 +496,7 @@ export const OrderSummary: React.FC = () => {
                     display: 'block',
                     width: '100%',
                     marginTop: '30px',
-                    padding: '16px',
+                    padding: '5px',
                     fontFamily: 'Raleway',
                     fontWeight: 'bold',
                     fontSize: '12px',

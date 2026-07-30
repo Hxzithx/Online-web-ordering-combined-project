@@ -7,7 +7,7 @@ export const About: React.FC = () => {
       {/* Page Title */}
       <section id="page-title" className="page-title bg-overlay bg-parallax bg-overlay-gradient">
         <div className="bg-section">
-          <img src="/assets/images/page-title/6.jpg" alt="Background" />
+          <img src="/assets/images/sliders/slide-bg/2.jpg" alt="Background" />
         </div>
         <div className="container">
           <div className="row">
