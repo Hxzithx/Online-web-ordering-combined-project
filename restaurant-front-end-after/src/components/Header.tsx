@@ -144,8 +144,8 @@ export const Header: React.FC = () => {
               <a href="https://tripadvisor.com" target="_blank" rel="noreferrer"><i className="fa fa-tripadvisor"></i></a>
             </div>
 
-            <div className="module module-reservation" style={{ marginLeft: '15px' }}>
-              <Link to="/reservation" className="btn btn-popup" style={{ display: 'flex', alignItems: 'center', height: '40px', padding: '10px 35px', lineHeight: '20px', borderRadius: '15px' }}>
+            <div className="module module-reservation" style={{ marginLeft: '20px' }}>
+              <Link to="/reservation" className="btn btn-popup" style={{ display: 'flex', alignItems: 'center', height: '35px', padding: '10px 35px', lineHeight: '20px', borderRadius: '15px' }}>
                 <i className="lnr lnr-users" style={{ marginRight: '8px' }}></i>Reservation
               </Link>
             </div>
@@ -224,7 +224,7 @@ export const Header: React.FC = () => {
                 </div>
               </div>
             )}
-            
+
             {!isAuthenticated && (
               <div className="module" style={{ marginLeft: '15px' }}>
                 <Link to="/login" className="btn btn--white btn--bordered btn--sm" style={{ height: '40px', padding: '10px 20px', border: '2px solid #c59d5f', color: '#c59d5f', textTransform: 'uppercase', fontSize: '11px', fontWeight: 'bold' }}>

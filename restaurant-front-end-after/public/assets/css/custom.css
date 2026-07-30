@@ -2807,3 +2807,41 @@
     border-radius: 30px !important;
     overflow: hidden !important;
 }
+
+/* Straight Header Navigation Bar */
+.header .container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 90px !important;
+}
+.header .navbar-collapse {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    float: none !important;
+}
+.header .navbar-nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    float: none !important;
+    margin: 0 !important;
+}
+.header .navbar-nav > li {
+    float: none !important;
+    display: flex !important;
+    align-items: center !important;
+}
+.header .navbar-nav > li > a {
+    display: flex !important;
+    align-items: center !important;
+    height: 90px !important;
+    padding: 0 10px !important;
+}
+.header .module {
+    float: none !important;
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
