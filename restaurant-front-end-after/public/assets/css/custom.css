@@ -2820,6 +2820,7 @@
     align-items: center !important;
     gap: 24px !important;
     float: none !important;
+    height: 90px !important;
 }
 .header .navbar-nav {
     display: flex !important;
@@ -2828,6 +2829,7 @@
     float: none !important;
     margin: 0 !important;
     padding: 0 !important;
+    height: 90px !important;
 }
 .header .navbar-nav > li {
     float: none !important;
@@ -2835,6 +2837,7 @@
     align-items: center !important;
     margin: 0 !important;
     padding: 0 !important;
+    height: 90px !important;
 }
 .header .navbar-nav > li > a {
     display: flex !important;
@@ -2843,11 +2846,26 @@
     padding: 0 8px !important;
     margin: 0 !important;
 }
-.header .module {
+.header .module,
+.header .module-reservation,
+.header .module-profile,
+.header .module-social {
     float: none !important;
     display: flex !important;
     align-items: center !important;
+    align-self: center !important;
+    height: 90px !important;
     margin: 0 !important;
+    padding: 0 !important;
+}
+.header .module-reservation .btn,
+.header .module-reservation a {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 40px !important;
+    margin: 0 !important;
+    vertical-align: middle !important;
 }
 
 /* Profile Dropdown Hover Effects */

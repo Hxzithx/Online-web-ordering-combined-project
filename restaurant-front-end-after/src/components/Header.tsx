@@ -144,9 +144,9 @@ export const Header: React.FC = () => {
               <a href="https://tripadvisor.com" target="_blank" rel="noreferrer"><i className="fa fa-tripadvisor"></i></a>
             </div>
 
-            <div className="module module-reservation" style={{ marginLeft: '20px' }}>
-              <Link to="/reservation" className="btn btn-popup" style={{ display: 'flex', alignItems: 'center', height: '35px', padding: '10px 35px', lineHeight: '20px', borderRadius: '15px' }}>
-                <i className="lnr lnr-users" style={{ marginRight: '8px' }}></i>Reservation
+            <div className="module module-reservation" style={{ display: 'flex', alignItems: 'center', height: '90px', margin: 0, padding: 0 }}>
+              <Link to="/reservation" className="btn btn-popup" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', height: '40px', padding: '0 24px', lineHeight: '40px', borderRadius: '30px', margin: 0 }}>
+                <i className="lnr lnr-users" style={{ marginRight: '8px', fontSize: '14px' }}></i>Reservation
               </Link>
             </div>
 
