@@ -51,19 +51,19 @@
 }
 
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 h1,
@@ -109,3 +109,295 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* Page Title / Hero Header Overlay Styling */
+.page-title,
+section#page-title {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 280px !important;
+  padding: 80px 0 60px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  background-color: #111111 !important;
+  text-align: center !important;
+}
+
+.page-title .bg-section,
+section#page-title .bg-section {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  overflow: hidden !important;
+}
+
+.page-title .bg-section img,
+section#page-title .bg-section img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+.page-title::before,
+section#page-title::before,
+.page-title.bg-overlay::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+
+.page-title .container,
+section#page-title .container {
+  position: relative !important;
+  z-index: 3 !important;
+  color: #ffffff !important;
+  width: 100% !important;
+}
+
+.page-title .title--content,
+section#page-title .title--content {
+  margin-bottom: 10px !important;
+}
+
+.page-title .title--subtitle,
+section#page-title .title--subtitle {
+  font-family: 'Great Vibes', cursive !important;
+  color: #c59d5f !important;
+  font-size: 36px !important;
+  margin-bottom: 5px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  line-height: 1.2 !important;
+}
+
+.page-title .title--heading h1,
+section#page-title .title--heading h1 {
+  font-family: 'Kaushan Script', cursive, sans-serif !important;
+  font-size: 44px !important;
+  color: #ffffff !important;
+  margin: 0 0 10px 0 !important;
+  padding: 0 !important;
+  font-weight: 400 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+  line-height: 1.2 !important;
+  letter-spacing: normal !important;
+}
+
+.page-title .breadcrumb,
+section#page-title .breadcrumb {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 15px 0 0 0 !important;
+  list-style: none !important;
+  border-radius: 0 !important;
+}
+
+.page-title .breadcrumb li,
+section#page-title .breadcrumb li {
+  font-family: 'Raleway', sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.page-title .breadcrumb li a,
+section#page-title .breadcrumb li a {
+  color: #c59d5f !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+}
+
+.page-title .breadcrumb li a:hover,
+section#page-title .breadcrumb li a:hover {
+  color: #ffffff !important;
+}
+
+.page-title .breadcrumb li.active,
+section#page-title .breadcrumb li.active {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.page-title .breadcrumb li + li::before {
+  content: '/' !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  padding: 0 6px 0 2px !important;
+}
+
+/* ==========================================================================
+   ANIMATIONS & SKELETON LOADER STYLES
+   ========================================================================== */
+
+/* Keyframe Animations */
+@keyframes grannySpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes grannyPulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 8px rgba(197, 157, 95, 0.6)); }
+}
+
+@keyframes grannyShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animation Helper Classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.4s ease-out forwards;
+}
+
+/* Stagger Animation Delays */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+
+/* Custom Luxury Loader Component Styles */
+.granny-loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  width: 100%;
+}
+
+.granny-spinner-ring {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.granny-spinner-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(197, 157, 95, 0.15);
+  border-top-color: #c59d5f;
+  animation: grannySpin 1s linear infinite;
+}
+
+.granny-spinner-ring::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 2px dashed rgba(197, 157, 95, 0.4);
+  animation: grannySpin 2.5s linear infinite reverse;
+}
+
+.granny-loader-icon {
+  font-size: 20px;
+  color: #c59d5f;
+  animation: grannyPulse 2s ease-in-out infinite;
+}
+
+.granny-loader-text {
+  margin-top: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #c59d5f;
+  animation: grannyPulse 2s ease-in-out infinite;
+}
+
+/* Skeleton Loading Cards */
+.skeleton-card {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  padding: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+  background-size: 200% 100%;
+  animation: grannyShimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-img {
+  width: 100%;
+  height: 220px;
+}
+
+.skeleton-img-thumb {
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+}
+
+.skeleton-line {
+  height: 14px;
+  margin-bottom: 10px;
+}
+
+.skeleton-line.short {
+  width: 40%;
+}
+
+.skeleton-line.medium {
+  width: 70%;
+}
+
+.skeleton-line.full {
+  width: 100%;
+}
+

@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
+import Loader from '../components/Loader';
 
 interface Category {
   id: number;
@@ -275,24 +276,17 @@ export const ShopSingle: React.FC = () => {
       <section className="shop-single" style={{ padding: '80px 0', backgroundColor: '#fff' }}>
         <div className="container">
           {error && (
-            <div className="alert alert-danger text-center" style={{ margin: '20px auto', maxWidth: '600px' }}>
+            <div className="alert alert-danger text-center animate-fade-in-scale" style={{ margin: '20px auto', maxWidth: '600px' }}>
               {error}
             </div>
           )}
 
           {loading && (
-            <div style={{ textAlign: 'center', padding: '50px 0' }}>
-              <div className="spinner" style={{ display: 'inline-block' }}>
-                <div className="bounce1" style={{ backgroundColor: '#c59d5f' }}></div>
-                <div className="bounce2" style={{ backgroundColor: '#c59d5f' }}></div>
-                <div className="bounce3" style={{ backgroundColor: '#c59d5f' }}></div>
-              </div>
-              <p style={{ color: '#a5a5a5', marginTop: '15px' }}>Loading product configuration...</p>
-            </div>
+            <Loader text="Loading product configuration..." showSkeletons={false} />
           )}
 
           {!loading && item && (
-            <div className="row">
+            <div className="row animate-fade-in-up">
               {/* Product Info Column */}
               <div className="col-md-9">
                 <div className="row">

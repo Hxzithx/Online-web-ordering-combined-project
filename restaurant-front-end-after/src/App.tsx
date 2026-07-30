@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import Loader from './components/Loader';
 
 // Layout components
 import Header from './components/Header';
@@ -37,11 +38,7 @@ const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   if (loading) {
     return (
       <div style={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', backgroundColor: '#0e0d0b', color: '#c59d5f' }}>
-        <div className="spinner">
-          <div className="bounce1" style={{ backgroundColor: '#c59d5f' }}></div>
-          <div className="bounce2" style={{ backgroundColor: '#c59d5f' }}></div>
-          <div className="bounce3" style={{ backgroundColor: '#c59d5f' }}></div>
-        </div>
+        <Loader text="Verifying authentication..." showSkeletons={false} />
       </div>
     );
   }

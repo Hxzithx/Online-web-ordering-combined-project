@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import Swal from 'sweetalert2';
+import Loader from '../components/Loader';
 
 interface Category {
   id: number;
@@ -178,24 +179,17 @@ export const ShopProducts: React.FC = () => {
       <section id="shop" className="shop shop-3 bg-gray pb-90" style={{ padding: '80px 0' }}>
         <div className="container">
           {error && (
-            <div className="alert alert-danger text-center" style={{ margin: '20px auto', maxWidth: '600px' }}>
+            <div className="alert alert-danger text-center animate-fade-in-scale" style={{ margin: '20px auto', maxWidth: '600px' }}>
               {error}
             </div>
           )}
 
           {loading && (
-            <div style={{ textAlign: 'center', padding: '50px 0' }}>
-              <div className="spinner" style={{ display: 'inline-block' }}>
-                <div className="bounce1" style={{ backgroundColor: '#c59d5f' }}></div>
-                <div className="bounce2" style={{ backgroundColor: '#c59d5f' }}></div>
-                <div className="bounce3" style={{ backgroundColor: '#c59d5f' }}></div>
-              </div>
-              <p style={{ color: '#a5a5a5', marginTop: '15px' }}>Loading items catalog...</p>
-            </div>
+            <Loader text="Loading shop catalog..." skeletonType="grid" count={6} />
           )}
 
           {!loading && !error && (
-            <div className="row">
+            <div className="row animate-fade-in-up">
               {/* Products Grid */}
               <div className="col-md-9">
                 <div className="shop-options" style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #e0e0e0', paddingBottom: '15px' }}>
@@ -208,13 +202,13 @@ export const ShopProducts: React.FC = () => {
 
                 <div className="row">
                   {filteredItems.length === 0 ? (
-                    <div className="col-xs-12 text-center" style={{ padding: '40px 0', color: '#a5a5a5' }}>
+                    <div className="col-xs-12 text-center animate-fade-in-scale" style={{ padding: '40px 0', color: '#a5a5a5' }}>
                       No items match your active filters.
                     </div>
                   ) : (
-                    filteredItems.map((item) => (
-                      <div key={item.id} className="col-xs-12 col-sm-6 col-md-4 mb-30">
-                        <div className="product-item" style={{ border: '1px solid #f0f0f0', backgroundColor: '#fff', height: '100%' }}>
+                    filteredItems.map((item, idx) => (
+                      <div key={item.id} className={`col-xs-12 col-sm-6 col-md-4 mb-30 animate-fade-in-up stagger-${(idx % 6) + 1}`}>
+                        <div className="product-item" style={{ border: '1px solid #f0f0f0', backgroundColor: '#fff', height: '100%', transition: 'transform 0.3s ease, box-shadow 0.3s ease' }}>
                           <div className="product--img" style={{ position: 'relative', overflow: 'hidden' }}>
                             <img
                               src={item.image_url || '/assets/images/shop/grid/15.jpg'}

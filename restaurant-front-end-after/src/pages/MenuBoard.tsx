@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import { Link } from 'react-router-dom';
+import Loader from '../components/Loader';
 
 interface Category {
   id: number;
@@ -106,24 +107,17 @@ export const MenuBoard: React.FC = () => {
       <section id="menuBoard" className="menu-board-section bg-white" style={{ padding: '80px 0' }}>
         <div className="container">
           {loading && (
-            <div style={{ textAlign: 'center', padding: '50px 0' }}>
-              <div className="spinner" style={{ display: 'inline-block' }}>
-                <div className="bounce1" style={{ backgroundColor: '#c59d5f' }}></div>
-                <div className="bounce2" style={{ backgroundColor: '#c59d5f' }}></div>
-                <div className="bounce3" style={{ backgroundColor: '#c59d5f' }}></div>
-              </div>
-              <p style={{ color: '#a5a5a5', marginTop: '15px' }}>Loading our premium menu board...</p>
-            </div>
+            <Loader text="Loading our premium menu board..." skeletonType="list" count={4} />
           )}
 
           {error && (
-            <div className="alert alert-danger text-center" style={{ margin: '30px auto', maxWidth: '600px' }}>
+            <div className="alert alert-danger text-center animate-fade-in-scale" style={{ margin: '30px auto', maxWidth: '600px' }}>
               {error}
             </div>
           )}
 
           {!loading && !error && (
-            <>
+            <div className="animate-fade-in-up">
               {/* Category tabs */}
               <ul className="nav nav-tabs" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', borderBottom: '2px solid #f0f0f0', marginBottom: '40px' }}>
                 {categories.map((cat) => (
@@ -145,6 +139,7 @@ export const MenuBoard: React.FC = () => {
                         padding: '15px 25px',
                         display: 'block',
                         textDecoration: 'none',
+                        transition: 'all 0.3s ease',
                       }}
                     >
                       {cat}
@@ -154,9 +149,9 @@ export const MenuBoard: React.FC = () => {
               </ul>
 
               {/* Items List */}
-              <div className="row">
-                {activeCategory && groupedItems[activeCategory]?.map((item) => (
-                  <div key={item.id} className="col-xs-12 col-sm-6 col-md-6 mb-40">
+              <div className="row animate-fade-in-up">
+                {activeCategory && groupedItems[activeCategory]?.map((item, idx) => (
+                  <div key={item.id} className={`col-xs-12 col-sm-6 col-md-6 mb-40 animate-fade-in-up stagger-${(idx % 6) + 1}`}>
                     <div className="dish-panel-inner" style={{ display: 'flex', gap: '20px', padding: '15px', backgroundColor: '#f9f9f9', border: '1px solid #f0f0f0', borderRadius: '4px' }}>
                       <div className="dish--img" style={{ flexShrink: 0, width: '120px', height: '120px', overflow: 'hidden', borderRadius: '4px' }}>
                         <img
@@ -194,7 +189,7 @@ export const MenuBoard: React.FC = () => {
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           )}
         </div>
       </section>
