@@ -2818,30 +2818,46 @@
 .header .navbar-collapse {
     display: flex !important;
     align-items: center !important;
-    gap: 20px !important;
+    gap: 24px !important;
     float: none !important;
 }
 .header .navbar-nav {
     display: flex !important;
     align-items: center !important;
-    gap: 20px !important;
+    gap: 16px !important;
     float: none !important;
     margin: 0 !important;
+    padding: 0 !important;
 }
 .header .navbar-nav > li {
     float: none !important;
     display: flex !important;
     align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 .header .navbar-nav > li > a {
     display: flex !important;
     align-items: center !important;
     height: 90px !important;
-    padding: 0 10px !important;
+    padding: 0 8px !important;
+    margin: 0 !important;
 }
 .header .module {
     float: none !important;
     display: flex !important;
     align-items: center !important;
     margin: 0 !important;
+}
+
+/* Profile Dropdown Hover Effects */
+.profile-dropdown-item:hover {
+    background: rgba(197, 157, 95, 0.14) !important;
+    color: #ffffff !important;
+    transform: translateX(4px);
+}
+.profile-dropdown-logout:hover {
+    background: rgba(255, 82, 82, 0.14) !important;
+    color: #ff5252 !important;
+    transform: translateX(4px);
 }

@@ -84,13 +84,13 @@ export const Header: React.FC = () => {
             className={`collapse navbar-collapse pull-right ${mobileMenuOpen ? 'in' : ''}`}
             style={{ display: mobileMenuOpen ? 'block' : undefined }}
           >
-            <ul className="nav navbar-nav nav-pos-right navbar-left">
-              <li className={location.pathname === '/home' ? 'active' : ''}>
-                <Link to="/home" className="menu-item">home</Link>
+            <ul className="nav navbar-nav" style={{ display: 'flex', alignItems: 'center', gap: '16px', margin: 0, padding: 0 }}>
+              <li className={location.pathname === '/home' ? 'active' : ''} style={{ margin: 0, padding: 0 }}>
+                <Link to="/home" className="menu-item" style={{ padding: '0 8px', margin: 0 }}>home</Link>
               </li>
 
-              <li className={`has-dropdown ${activeDropdown === 'about' ? 'open' : ''}`}>
-                <a href="#" onClick={(e) => toggleDropdown('about', e)} className="dropdown-toggle menu-item">
+              <li className={`has-dropdown ${activeDropdown === 'about' ? 'open' : ''}`} style={{ margin: 0, padding: 0 }}>
+                <a href="#" onClick={(e) => toggleDropdown('about', e)} className="dropdown-toggle menu-item" style={{ padding: '0 8px', margin: 0 }}>
                   About
                 </a>
                 <ul className="dropdown-menu">
@@ -103,8 +103,8 @@ export const Header: React.FC = () => {
                 </ul>
               </li>
 
-              <li className={`has-dropdown ${activeDropdown === 'menu' ? 'open' : ''}`}>
-                <a href="#" onClick={(e) => toggleDropdown('menu', e)} className="dropdown-toggle menu-item">
+              <li className={`has-dropdown ${activeDropdown === 'menu' ? 'open' : ''}`} style={{ margin: 0, padding: 0 }}>
+                <a href="#" onClick={(e) => toggleDropdown('menu', e)} className="dropdown-toggle menu-item" style={{ padding: '0 8px', margin: 0 }}>
                   Menu
                 </a>
                 <ul className="dropdown-menu">
@@ -112,8 +112,8 @@ export const Header: React.FC = () => {
                 </ul>
               </li>
 
-              <li className={`has-dropdown ${activeDropdown === 'blog' ? 'open' : ''}`}>
-                <a href="#" onClick={(e) => toggleDropdown('blog', e)} className="dropdown-toggle menu-item">
+              <li className={`has-dropdown ${activeDropdown === 'blog' ? 'open' : ''}`} style={{ margin: 0, padding: 0 }}>
+                <a href="#" onClick={(e) => toggleDropdown('blog', e)} className="dropdown-toggle menu-item" style={{ padding: '0 8px', margin: 0 }}>
                   Blog
                 </a>
                 <ul className="dropdown-menu">
@@ -121,8 +121,8 @@ export const Header: React.FC = () => {
                 </ul>
               </li>
 
-              <li className={`has-dropdown ${activeDropdown === 'shop' ? 'open' : ''}`}>
-                <a href="#" onClick={(e) => toggleDropdown('shop', e)} className="dropdown-toggle menu-item">
+              <li className={`has-dropdown ${activeDropdown === 'shop' ? 'open' : ''}`} style={{ margin: 0, padding: 0 }}>
+                <a href="#" onClick={(e) => toggleDropdown('shop', e)} className="dropdown-toggle menu-item" style={{ padding: '0 8px', margin: 0 }}>
                   shop
                 </a>
                 <ul className="dropdown-menu">
@@ -152,7 +152,7 @@ export const Header: React.FC = () => {
 
             {/* Profile Dropdown */}
             {isAuthenticated && user && (
-              <div className={`module module-profile ${profileDropdownOpen ? 'open' : ''}`} style={{ marginLeft: '15px', position: 'relative' }}>
+              <div className="module module-profile" style={{ margin: 0, position: 'relative', display: 'flex', alignItems: 'center' }}>
                 <div className="dropdown profile-dropdown">
                   <a
                     href="#"
@@ -161,8 +161,9 @@ export const Header: React.FC = () => {
                       e.preventDefault();
                       setProfileDropdownOpen(!profileDropdownOpen);
                     }}
+                    style={{ display: 'flex', alignItems: 'center' }}
                   >
-                    <div className="profile-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#c59d5f', color: '#fff', fontWeight: 'bold', overflow: 'hidden' }}>
+                    <div className="profile-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '42px', height: '42px', borderRadius: '50%', backgroundColor: '#c59d5f', color: '#111', fontWeight: 'bold', overflow: 'hidden', border: '2px solid #c59d5f', cursor: 'pointer' }}>
                       {user.avatar && !headerImgError ? (
                         <img
                           src={getAvatarUrl(user.avatar) || ''}
@@ -177,48 +178,70 @@ export const Header: React.FC = () => {
                   </a>
 
                   {profileDropdownOpen && (
-                    <ul className="dropdown-menu dropdown-menu-right profile-menu" style={{ display: 'block', position: 'absolute', top: '100%', right: 0, zIndex: 1000, minWidth: '220px', backgroundColor: '#0e0d0b', border: '1px solid rgba(197, 157, 95, 0.3)' }}>
-                      <li className="profile-info" style={{ padding: '15px', display: 'flex', alignItems: 'center', borderBottom: '1px solid rgba(197, 157, 95, 0.15)' }}>
-                        <div className="profile-info-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#c59d5f', color: '#fff', fontWeight: 'bold', marginRight: '10px', overflow: 'hidden' }}>
+                    <ul style={{
+                      position: 'absolute', top: 'calc(100% + 12px)', right: 0, zIndex: 10000,
+                      width: '260px', margin: 0,
+                      background: '#141210',
+                      border: '1px solid rgba(200,169,110,0.25)',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      boxShadow: '0 20px 60px rgba(0,0,0,0.6)',
+                      listStyle: 'none', padding: 0,
+                    }}>
+
+                      {/* Header */}
+                      <li style={{ padding: '18px 18px 14px', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'linear-gradient(135deg, #7a5a20, #c8a96e)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Georgia, serif', fontSize: '17px', fontWeight: 700, color: '#111', flexShrink: 0, border: '2px solid rgba(200,169,110,0.4)', overflow: 'hidden' }}>
                           {user.avatar && !headerImgError ? (
-                            <img
-                              src={getAvatarUrl(user.avatar) || ''}
-                              alt=""
-                              style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
-                            />
+                            <img src={getAvatarUrl(user.avatar) || ''} alt="" onError={() => setHeaderImgError(true)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                           ) : (
                             getInitials(`${user.first_name} ${user.last_name}`)
                           )}
                         </div>
-                        <div className="profile-info-details" style={{ display: 'flex', flexDirection: 'column', color: '#f0ebe0' }}>
-                          <strong style={{ fontSize: '14px' }}>{`${user.first_name} ${user.last_name}`}</strong>
-                          <span style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }}>{user.email}</span>
+                        <div style={{ overflow: 'hidden' }}>
+                          <div style={{ fontSize: '14px', fontWeight: 600, color: '#f2ede3', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user.first_name} {user.last_name}</div>
+                          <div style={{ fontSize: '11px', color: 'rgba(242,237,227,0.42)', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user.email}</div>
+                          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '5px', background: 'rgba(200,169,110,0.12)', border: '1px solid rgba(200,169,110,0.22)', padding: '1px 8px', borderRadius: '20px' }}>
+                            <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#c8a96e', display: 'inline-block' }}></span>
+                            <span style={{ fontSize: '10px', fontWeight: 600, color: '#c8a96e', letterSpacing: '1px', textTransform: 'uppercase' }}>User</span>
+                          </div>
                         </div>
                       </li>
 
-                      <li className="divider" style={{ height: '1px', margin: '5px 0', overflow: 'hidden', backgroundColor: 'rgba(197, 157, 95, 0.15)' }}></li>
-
-                      <li>
-                        <Link to="/profile" style={{ color: '#f0ebe0', padding: '8px 20px', display: 'block' }}>
-                          <i className="fa fa-user" style={{ marginRight: '10px', color: '#c59d5f' }}></i> My Profile
-                        </Link>
+                      {/* Menu Items */}
+                      <li style={{ padding: '8px' }}>
+                        {[
+                          { to: '/profile', icon: 'fa-user', label: 'My Profile' },
+                          { to: '/my-orders', icon: 'fa-list', label: 'My Orders' },
+                        ].map(({ to, icon, label }) => (
+                          <Link key={to} to={to} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px 12px', borderRadius: '10px', textDecoration: 'none', color: 'rgba(242,237,227,0.80)', fontSize: '13px', fontWeight: 500 }}
+                            onMouseOver={e => { e.currentTarget.style.background = 'rgba(200,169,110,0.08)'; e.currentTarget.style.color = '#f2ede3'; }}
+                            onMouseOut={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(242,237,227,0.80)'; }}>
+                            <span style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(200,169,110,0.10)', border: '1px solid rgba(200,169,110,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                              <i className={`fa ${icon}`} style={{ fontSize: '14px', color: '#c8a96e' }}></i>
+                            </span>
+                            {label}
+                          </Link>
+                        ))}
                       </li>
 
-                      <li>
-                        <Link to="/my-orders" style={{ color: '#f0ebe0', padding: '8px 20px', display: 'block' }}>
-                          <i className="fa fa-list" style={{ marginRight: '10px', color: '#c59d5f' }}></i> My Orders
-                        </Link>
-                      </li>
+                      {/* Divider */}
+                      <li style={{ height: '1px', background: 'rgba(255,255,255,0.06)', margin: '0 8px' }}></li>
 
-                      <li className="divider" style={{ height: '1px', margin: '5px 0', overflow: 'hidden', backgroundColor: 'rgba(197, 157, 95, 0.15)' }}></li>
-
-                      <li>
+                      {/* Logout */}
+                      <li style={{ padding: '8px' }}>
                         <form onSubmit={handleLogout}>
-                          <button type="submit" className="profile-logout-btn" style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', color: '#ff6b6b', padding: '8px 20px', display: 'block', cursor: 'pointer' }}>
-                            <i className="fa fa-sign-out" style={{ marginRight: '10px' }}></i> Logout
+                          <button type="submit" style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '12px', padding: '10px 12px', borderRadius: '10px', background: 'transparent', border: 'none', color: 'rgba(255,100,100,0.75)', fontSize: '13px', fontWeight: 500, cursor: 'pointer', textAlign: 'left' }}
+                            onMouseOver={e => { e.currentTarget.style.background = 'rgba(255,80,80,0.08)'; e.currentTarget.style.color = '#ff6b6b'; }}
+                            onMouseOut={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,100,100,0.75)'; }}>
+                            <span style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(255,80,80,0.08)', border: '1px solid rgba(255,80,80,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                              <i className="fa fa-sign-out" style={{ fontSize: '14px', color: '#ff6b6b' }}></i>
+                            </span>
+                            Logout
                           </button>
                         </form>
                       </li>
+
                     </ul>
                   )}
                 </div>
