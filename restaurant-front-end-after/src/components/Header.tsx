@@ -103,22 +103,12 @@ export const Header: React.FC = () => {
                 </ul>
               </li>
 
-              <li className={`has-dropdown ${activeDropdown === 'menu' ? 'open' : ''}`} style={{ margin: 0, padding: 0 }}>
-                <a href="#" onClick={(e) => toggleDropdown('menu', e)} className="dropdown-toggle menu-item" style={{ padding: '0 8px', margin: 0 }}>
-                  Menu
-                </a>
-                <ul className="dropdown-menu">
-                  <li><Link to="/menu">menu board</Link></li>
-                </ul>
+              <li className={location.pathname === '/menu' ? 'active' : ''} style={{ margin: 0, padding: 0 }}>
+                <Link to="/menu" className="menu-item" style={{ padding: '0 8px', margin: 0 }}>menu</Link>
               </li>
 
-              <li className={`has-dropdown ${activeDropdown === 'blog' ? 'open' : ''}`} style={{ margin: 0, padding: 0 }}>
-                <a href="#" onClick={(e) => toggleDropdown('blog', e)} className="dropdown-toggle menu-item" style={{ padding: '0 8px', margin: 0 }}>
-                  Blog
-                </a>
-                <ul className="dropdown-menu">
-                  <li><Link to="/blog">blog carousel</Link></li>
-                </ul>
+              <li className={location.pathname === '/blog' ? 'active' : ''} style={{ margin: 0, padding: 0 }}>
+                <Link to="/blog" className="menu-item" style={{ padding: '0 8px', margin: 0 }}>blog</Link>
               </li>
 
               <li className={`has-dropdown ${activeDropdown === 'shop' ? 'open' : ''}`} style={{ margin: 0, padding: 0 }}>

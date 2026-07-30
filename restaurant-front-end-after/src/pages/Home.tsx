@@ -145,7 +145,7 @@ export const Home: React.FC = () => {
             <div className="col-xs-12 col-sm-4 col-md-4">
               <div className="dish-panel-inner" style={{ textAlign: 'center', padding: '20px', border: '1px solid #f0f0f0', borderRadius: '4px' }}>
                 <div className="dish--img" style={{ overflow: 'hidden', borderRadius: '4px' }}>
-                  <img src="/assets/images/shop/grid/1.jpg" alt="Dish 1" style={{ width: '100%', height: '220px', objectFit: 'cover', transition: 'all 0.3s' }} />
+                  <img src="/assets/images/shop/grid/15.jpg" alt="Dish 1" style={{ width: '100%', height: '220px', objectFit: 'cover', transition: 'all 0.3s' }} />
                 </div>
                 <div className="dish--content" style={{ marginTop: '20px' }}>
                   <span className="dish--price" style={{ color: '#c59d5f', fontSize: '20px', fontWeight: 'bold' }}>Rs. 1,250.00</span>
@@ -162,7 +162,7 @@ export const Home: React.FC = () => {
             <div className="col-xs-12 col-sm-4 col-md-4">
               <div className="dish-panel-inner" style={{ textAlign: 'center', padding: '20px', border: '1px solid #f0f0f0', borderRadius: '4px' }}>
                 <div className="dish--img" style={{ overflow: 'hidden', borderRadius: '4px' }}>
-                  <img src="/assets/images/shop/grid/2.jpg" alt="Dish 2" style={{ width: '100%', height: '220px', objectFit: 'cover', transition: 'all 0.3s' }} />
+                  <img src="/assets/images/shop/grid/15.jpg" alt="Dish 2" style={{ width: '100%', height: '220px', objectFit: 'cover', transition: 'all 0.3s' }} />
                 </div>
                 <div className="dish--content" style={{ marginTop: '20px' }}>
                   <span className="dish--price" style={{ color: '#c59d5f', fontSize: '20px', fontWeight: 'bold' }}>Rs. 890.00</span>
@@ -179,7 +179,7 @@ export const Home: React.FC = () => {
             <div className="col-xs-12 col-sm-4 col-md-4">
               <div className="dish-panel-inner" style={{ textAlign: 'center', padding: '20px', border: '1px solid #f0f0f0', borderRadius: '4px' }}>
                 <div className="dish--img" style={{ overflow: 'hidden', borderRadius: '4px' }}>
-                  <img src="/assets/images/shop/grid/3.jpg" alt="Dish 3" style={{ width: '100%', height: '220px', objectFit: 'cover', transition: 'all 0.3s' }} />
+                  <img src="/assets/images/shop/grid/15.jpg" alt="Dish 3" style={{ width: '100%', height: '220px', objectFit: 'cover', transition: 'all 0.3s' }} />
                 </div>
                 <div className="dish--content" style={{ marginTop: '20px' }}>
                   <span className="dish--price" style={{ color: '#c59d5f', fontSize: '20px', fontWeight: 'bold' }}>Rs. 450.00</span>
