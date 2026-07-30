@@ -145,7 +145,7 @@ export const Header: React.FC = () => {
             </div>
 
             <div className="module module-reservation" style={{ marginLeft: '15px' }}>
-              <Link to="/reservation" className="btn btn-popup" style={{ display: 'flex', alignItems: 'center', height: '40px', padding: '10px 20px', lineHeight: '20px' }}>
+              <Link to="/reservation" className="btn btn-popup" style={{ display: 'flex', alignItems: 'center', height: '40px', padding: '10px 35px', lineHeight: '20px', borderRadius: '15px' }}>
                 <i className="lnr lnr-users" style={{ marginRight: '8px' }}></i>Reservation
               </Link>
             </div>

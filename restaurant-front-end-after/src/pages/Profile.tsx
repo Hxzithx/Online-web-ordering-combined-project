@@ -150,10 +150,10 @@ export const Profile: React.FC = () => {
       <div className="orb orb-2"></div>
       <div className="orb orb-3"></div>
 
-      <div className="profile-container">
+      <div className="profile-container" style={{ display: 'flex', flexDirection: 'column', height: 'auto', minHeight: 0, justifyContent: 'flex-start' }}>
         <div className="side-accent"></div>
 
-        <div className="profile-header">
+        <div className="profile-header" style={{ marginBottom: '20px' }}>
           <div className="header-label">ACCOUNT</div>
           <h2>My Profile</h2>
           <p className="header-sub">Manage your personal details & preferences</p>
@@ -165,10 +165,10 @@ export const Profile: React.FC = () => {
             <p style={{ marginTop: '10px', color: '#a5a5a5' }}>Loading account details...</p>
           </div>
         ) : (
-          <form id="profile-form" onSubmit={handleSubmit}>
+          <form id="profile-form" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px', height: 'auto', minHeight: 0, margin: 0, padding: 0, justifyContent: 'flex-start' }}>
             {/* Avatar Section */}
-            <div className="avatar-section">
-              <div className="avatar-ring">
+            <div className="avatar-section" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '20px', height: 'auto', minHeight: 0, margin: '0 0 0 0' }}>
+              <div className="avatar-ring" style={{ width: '80px', height: '80px', flexShrink: 0, position: 'relative' }}>
                 <div className="profile-avatar-large">
                   {avatarPreview && !imgError ? (
                     <img
@@ -199,18 +199,18 @@ export const Profile: React.FC = () => {
                 style={{ display: 'none' }}
               />
 
-              <div className="avatar-info">
+              <div className="avatar-info" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <span className="avatar-name">{name || `${user?.first_name || ''} ${user?.last_name || ''}`}</span>
                 <span className="avatar-role">{user?.role ? user.role.toUpperCase() : 'CUSTOMER'}</span>
               </div>
             </div>
 
-            <div className="section-divider">
+            <div className="section-divider" style={{ margin: '0 0 0 0', padding: 0 }}>
               <span>Personal Information</span>
             </div>
 
             {/* Fields Grid */}
-            <div className="fields-grid">
+            <div className="fields-grid" style={{ margin: '0 0 0 0', padding: 0 }}>
               <div className="field-group full-width">
                 <label htmlFor="name">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
