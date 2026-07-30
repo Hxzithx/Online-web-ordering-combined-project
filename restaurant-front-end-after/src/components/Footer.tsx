@@ -67,7 +67,7 @@ export const Footer: React.FC = () => {
         <div className="row" style={{ marginTop: '40px', paddingTop: '20px', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
           <div className="col-xs-12 col-sm-12 col-md-12">
             <p className="copyright" style={{ color: 'rgba(255, 255, 255, 0.3)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              &copy; {new Date().getFullYear()} Granny Restaurant. All Rights Reserved.
+              &copy; {new Date().getFullYear()} SOFTO Solutions. All Rights Reserved.
             </p>
           </div>
         </div>
