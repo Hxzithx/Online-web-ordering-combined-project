@@ -85,7 +85,7 @@ class TableMergeController extends Controller implements HasMiddleware
 
          $tableMerge = TableMerge::create($fields);
 
-         Table::where('id', $tableIds)->update(['status' => 'reserved']);
+         Table::whereIn('id', $tableIds)->update(['status' => 'reserved']);
 
          DB::commit();
 

@@ -198,7 +198,7 @@ export const Reservation: React.FC = () => {
           <div className="row">
             {/* Form Column */}
             <div className="col-xs-12 col-sm-12 col-md-4">
-              <div style={{ backgroundColor: '#0e0d0b', padding: '30px', borderRadius: '4px', border: '1px solid rgba(197, 157, 95, 0.3)', color: '#fff' }}>
+              <div style={{ backgroundColor: '#0e0d0b', padding: '30px 30px 20px 30px', borderRadius: '4px', border: '1px solid rgba(197, 157, 95, 0.3)', color: '#fff' }}>
                 <h4 style={{ fontFamily: 'Kaushan Script', color: '#c59d5f', marginBottom: '25px', fontSize: '22px' }}>Reservation Details</h4>
                 
                 <form onSubmit={handleReservationSubmit}>
@@ -257,7 +257,7 @@ export const Reservation: React.FC = () => {
                   <button 
                     type="submit" 
                     className="btn btn--secondary btn--block"
-                    style={{ backgroundColor: '#c59d5f', border: 'none', color: '#fff', padding: '14px', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 'bold', fontSize: '11px', borderRadius: '25px', cursor: 'pointer' }}
+                    style={{ backgroundColor: '#c59d5f', border: 'none', color: '#fff', padding: '5px', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 'bold', fontSize: '11px', borderRadius: '25px', cursor: 'pointer', marginTop: '25px' }}
                   >
                     Confirm Table & Browse Menu
                   </button>
