@@ -1799,7 +1799,7 @@
  
 /* ── Layout ── */
 .profile-wrapper {
-    min-height: 100vh;
+    min-height: calc(100vh - 120px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1807,6 +1807,7 @@
     position: relative;
     background: #0b0a08;
     overflow: hidden;
+    width: 100%;
 }
  
 /* Ambient orbs */
@@ -1843,11 +1844,12 @@
 /* ── Card ── */
 .profile-container {
     width: 100%;
-    max-width: 560px;
+    max-width: 800px;
+    margin: 0 auto;
     background: var(--surface);
     border: 1px solid var(--gold-border);
     border-radius: 24px;
-    padding: 48px 44px 52px;
+    padding: 48px 50px;
     position: relative;
     overflow: hidden;
     box-shadow:
@@ -1923,16 +1925,26 @@
     margin-bottom: 24px;
 }
  
+/* ── Profile Form Layout ── */
+#profile-form {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 /* ── Avatar Section ── */
 .avatar-section {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 20px;
-    background: var(--surface-2);
-    border: 1px solid var(--gold-border);
-    border-radius: var(--radius);
-    margin-bottom: 28px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    padding: 20px !important;
+    background: var(--surface-2) !important;
+    border: 1px solid var(--gold-border) !important;
+    border-radius: var(--radius) !important;
+    margin-top: 0 !important;
+    margin-bottom: 24px !important;
 }
  
 .avatar-ring {
@@ -1953,12 +1965,16 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    position: relative;
     border: 2px solid var(--gold);
     box-shadow: 0 0 0 4px rgba(200,169,110,0.12), 0 8px 24px rgba(200,169,110,0.15);
 }
 .profile-avatar-large img {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
+    border-radius: 50%;
 }
  
 .avatar-edit-btn {
@@ -2006,10 +2022,11 @@
  
 /* ── Section Divider ── */
 .section-divider {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 22px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    margin-top: 0 !important;
+    margin-bottom: 24px !important;
 }
 .section-divider::before,
 .section-divider::after {
@@ -2104,12 +2121,14 @@
 /* ── Actions ── */
 .form-actions {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: stretch;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+    margin-top: 30px;
 }
- 
+
 .updateProfile-btn {
+    flex: 2;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -4,6 +4,26 @@ import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import Swal from 'sweetalert2';
 
+export const getAvatarUrl = (avatarPath?: string | null): string | null => {
+  if (!avatarPath) return null;
+  if (
+    avatarPath.startsWith('blob:') ||
+    avatarPath.startsWith('data:') ||
+    avatarPath.startsWith('http://') ||
+    avatarPath.startsWith('https://')
+  ) {
+    return avatarPath;
+  }
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8001/';
+  const cleanBase = apiBaseUrl.endsWith('/') ? apiBaseUrl : `${apiBaseUrl}/`;
+  const cleanPath = avatarPath.startsWith('/') ? avatarPath.substring(1) : avatarPath;
+
+  if (cleanPath.startsWith('storage/')) {
+    return `${cleanBase}${cleanPath}`;
+  }
+  return `${cleanBase}storage/${cleanPath}`;
+};
+
 export const Profile: React.FC = () => {
   const { user, updateUser } = useAuth();
 
@@ -12,6 +32,7 @@ export const Profile: React.FC = () => {
   const [address, setAddress] = useState('');
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+  const [imgError, setImgError] = useState(false);
   
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
@@ -27,8 +48,11 @@ export const Profile: React.FC = () => {
         setName(fullName || (user ? `${user.first_name} ${user.last_name}` : ''));
         setPhone(customer.phone || '');
         setAddress(customer.address || '');
-        if (customer.avatar) {
-          setAvatarPreview(customer.avatar);
+        
+        const avatar = customer.avatar || user?.avatar;
+        if (avatar) {
+          setAvatarPreview(getAvatarUrl(avatar));
+          setImgError(false);
         }
       } catch (err) {
         console.error('Error fetching profile:', err);
@@ -45,6 +69,7 @@ export const Profile: React.FC = () => {
     if (file) {
       setAvatarFile(file);
       setAvatarPreview(URL.createObjectURL(file));
+      setImgError(false);
     }
   };
 
@@ -62,8 +87,6 @@ export const Profile: React.FC = () => {
     formData.append('phone', phone);
     formData.append('address', address);
     
-    // In Laravel/Sanctum, standard PUT request sometimes struggles with Multipart forms.
-    // However, the backend Route matches POST/PUT, so we can POST to api/customer/profile.
     if (avatarFile) {
       formData.append('avatar', avatarFile);
     }
@@ -77,6 +100,12 @@ export const Profile: React.FC = () => {
 
       const updatedCustomer = response.data.customer;
       
+      const newAvatarUrl = getAvatarUrl(updatedCustomer.avatar);
+      if (newAvatarUrl) {
+        setAvatarPreview(newAvatarUrl);
+        setImgError(false);
+      }
+
       // Update local auth context
       updateUser({
         first_name: updatedCustomer.first_name,
@@ -141,8 +170,14 @@ export const Profile: React.FC = () => {
             <div className="avatar-section">
               <div className="avatar-ring">
                 <div className="profile-avatar-large">
-                  {avatarPreview ? (
-                    <img id="avatarPreview" src={avatarPreview} alt="Avatar" />
+                  {avatarPreview && !imgError ? (
+                    <img
+                      id="avatarPreview"
+                      src={avatarPreview}
+                      alt=""
+                      onError={() => setImgError(true)}
+                      style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', display: 'block' }}
+                    />
                   ) : (
                     <span id="avatarLetter">{getInitials()}</span>
                   )}
@@ -178,7 +213,7 @@ export const Profile: React.FC = () => {
             <div className="fields-grid">
               <div className="field-group full-width">
                 <label htmlFor="name">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                     <circle cx="12" cy="7" r="4" />
                   </svg>
@@ -196,7 +231,7 @@ export const Profile: React.FC = () => {
 
               <div className="field-group full-width">
                 <label>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                     <polyline points="22,6 12,13 2,6" />
                   </svg>
@@ -208,7 +243,7 @@ export const Profile: React.FC = () => {
 
               <div className="field-group">
                 <label htmlFor="phone">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.42 2 2 0 0 1 3.55 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l1.57-1.57a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
                   Phone Number
@@ -225,7 +260,7 @@ export const Profile: React.FC = () => {
 
               <div className="field-group">
                 <label>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
                     <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
                   </svg>
@@ -236,7 +271,7 @@ export const Profile: React.FC = () => {
 
               <div className="field-group full-width">
                 <label htmlFor="address">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                     <circle cx="12" cy="10" r="3" />
                   </svg>

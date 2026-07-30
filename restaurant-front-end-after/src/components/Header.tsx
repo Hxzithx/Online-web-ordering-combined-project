@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { getAvatarUrl } from '../pages/Profile';
 
 export const Header: React.FC = () => {
   const { user, logout, isAuthenticated } = useAuth();
@@ -11,6 +12,7 @@ export const Header: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [headerImgError, setHeaderImgError] = useState(false);
 
   // Function to load cart count
   const updateCartCount = () => {
@@ -160,9 +162,14 @@ export const Header: React.FC = () => {
                       setProfileDropdownOpen(!profileDropdownOpen);
                     }}
                   >
-                    <div className="profile-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#c59d5f', color: '#fff', fontWeight: 'bold' }}>
-                      {user.avatar ? (
-                        <img src={user.avatar} alt="profile" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                    <div className="profile-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#c59d5f', color: '#fff', fontWeight: 'bold', overflow: 'hidden' }}>
+                      {user.avatar && !headerImgError ? (
+                        <img
+                          src={getAvatarUrl(user.avatar) || ''}
+                          alt=""
+                          onError={() => setHeaderImgError(true)}
+                          style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', display: 'block' }}
+                        />
                       ) : (
                         getInitials(`${user.first_name} ${user.last_name}`)
                       )}
@@ -172,8 +179,16 @@ export const Header: React.FC = () => {
                   {profileDropdownOpen && (
                     <ul className="dropdown-menu dropdown-menu-right profile-menu" style={{ display: 'block', position: 'absolute', top: '100%', right: 0, zIndex: 1000, minWidth: '220px', backgroundColor: '#0e0d0b', border: '1px solid rgba(197, 157, 95, 0.3)' }}>
                       <li className="profile-info" style={{ padding: '15px', display: 'flex', alignItems: 'center', borderBottom: '1px solid rgba(197, 157, 95, 0.15)' }}>
-                        <div className="profile-info-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#c59d5f', color: '#fff', fontWeight: 'bold', marginRight: '10px' }}>
-                          {getInitials(`${user.first_name} ${user.last_name}`)}
+                        <div className="profile-info-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#c59d5f', color: '#fff', fontWeight: 'bold', marginRight: '10px', overflow: 'hidden' }}>
+                          {user.avatar && !headerImgError ? (
+                            <img
+                              src={getAvatarUrl(user.avatar) || ''}
+                              alt=""
+                              style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+                            />
+                          ) : (
+                            getInitials(`${user.first_name} ${user.last_name}`)
+                          )}
                         </div>
                         <div className="profile-info-details" style={{ display: 'flex', flexDirection: 'column', color: '#f0ebe0' }}>
                           <strong style={{ fontSize: '14px' }}>{`${user.first_name} ${user.last_name}`}</strong>

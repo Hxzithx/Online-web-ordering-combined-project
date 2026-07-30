@@ -43,21 +43,26 @@ export const ShopProducts: React.FC = () => {
     const fetchShopItems = async () => {
       try {
         setLoading(true);
-        const response = await api.get('api/menu');
-        const itemsData = response.data.items || [];
+        const [menuRes, pricesRes] = await Promise.all([
+          api.get('api/menu'),
+          api.get('api/menu/item-prices').catch(() => ({ data: { item_prices: [] } }))
+        ]);
 
-        // Fetch prices
-        const itemsWithPrices = await Promise.all(
-          itemsData.map(async (item: any) => {
-            try {
-              const priceRes = await api.get(`api/menu/item-prices/${item.id}`);
-              item.real_price = priceRes.data.item_price?.price ?? 0;
-            } catch (err) {
-              item.real_price = 0;
-            }
-            return item;
-          })
-        );
+        const itemsData = menuRes.data.items || [];
+        const allPrices = pricesRes.data.item_prices || [];
+
+        // Build price lookup map
+        const priceMap: Record<number, number> = {};
+        allPrices.forEach((p: any) => {
+          if (p.item_id && (priceMap[p.item_id] === undefined || Number(p.price) < priceMap[p.item_id])) {
+            priceMap[p.item_id] = Number(p.price);
+          }
+        });
+
+        const itemsWithPrices = itemsData.map((item: any) => ({
+          ...item,
+          real_price: priceMap[item.id] !== undefined ? priceMap[item.id] : 0
+        }));
 
         setItems(itemsWithPrices);
         setFilteredItems(itemsWithPrices);

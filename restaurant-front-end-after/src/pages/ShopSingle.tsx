@@ -58,44 +58,44 @@ export const ShopSingle: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // 1. Fetch item
-        const itemRes = await api.get(`api/menu/${id}`);
+        // Parallelized API requests for instant load speed
+        const [itemRes, priceRes, portionsRes, addonsRes, allRes] = await Promise.all([
+          api.get(`api/menu/${id}`),
+          api.get(`api/menu/item-prices/item/${id}`).catch(() => null),
+          api.get('api/portions').catch(() => null),
+          api.get('api/add-ons').catch(() => null),
+          api.get('api/menu').catch(() => null),
+        ]);
+
         const rawItem = itemRes.data.item || itemRes.data;
 
-        // Fetch real price
-        try {
-          const priceRes = await api.get(`api/menu/item-prices/${id}`);
-          rawItem.real_price = priceRes.data.item_price?.price ?? 0;
-        } catch {
+        // Set real price if available
+        if (priceRes && priceRes.data) {
+          const itemPrices = priceRes.data.item_price || [];
+          if (Array.isArray(itemPrices) && itemPrices.length > 0) {
+            rawItem.real_price = itemPrices[0].price ?? 0;
+          } else if (priceRes.data.item_price?.price) {
+            rawItem.real_price = priceRes.data.item_price.price;
+          } else {
+            rawItem.real_price = 0;
+          }
+        } else {
           rawItem.real_price = 0;
         }
         setItem(rawItem);
 
-        // 2. Fetch portions
-        try {
-          const portionsRes = await api.get('api/portions');
-          const portionsData = portionsRes.data.portions || [];
-          setPortions(portionsData);
-          if (portionsData.length > 0) {
-            setSelectedPortion(portionsData[0]);
-          }
-        } catch (err) {
-          console.error('Error fetching portions:', err);
+        // Portions
+        const portionsData = portionsRes?.data?.portions || [];
+        setPortions(portionsData);
+        if (portionsData.length > 0) {
+          setSelectedPortion(portionsData[0]);
         }
 
-        // 3. Fetch add-ons
-        try {
-          const addonsRes = await api.get('api/add-ons');
-          setAddons(addonsRes.data.AddOn || []);
-        } catch (err) {
-          console.error('Error fetching add-ons:', err);
-        }
+        // Addons
+        setAddons(addonsRes?.data?.AddOn || []);
 
-        // 4. Fetch all items for related items & sidebar categories
-        const allRes = await api.get('api/menu');
-        const allItems = allRes.data.items || [];
-
-        // Calculate category counts
+        // Categories & related products
+        const allItems = allRes?.data?.items || [];
         const catMap: Record<string, number> = {};
         allItems.forEach((i: any) => {
           const name = i.category?.name || 'General';

@@ -16,13 +16,13 @@ class ItemPriceSeeder extends Seeder
     {
         // Get some existing IDs to link the prices to
         $item = Item::first();
-        $dineIn = OrderType::where('name', 'Dine In')->first();
+        $dineIn = OrderType::where('name', 'Dine-in')->first();
         $takeaway = OrderType::where('name', 'Takeaway')->first();
 
         // Check if we have the necessary data before seeding
         if ($item && $dineIn) {
             ItemPrice::create([
-                'item_id'           => $item->id,
+                'item_id'           => 1,
                 'variant_id'        => null, // Optional field
                 'portion_id'        => null, // Optional field
                 'order_type_id'     => $dineIn->id,

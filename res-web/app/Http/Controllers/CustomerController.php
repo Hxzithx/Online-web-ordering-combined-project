@@ -139,25 +139,25 @@ class CustomerController extends Controller implements HasMiddleware
               $fields = $request->validate([
                'first_name'  => 'sometimes|required|string|max:255',
                'last_name'   => 'sometimes|required|string|max:255',
-               'email'       => 'sometimes|nullable|string|max:255|unique:customers,email' . $customer->id,
                'phone'       => 'sometimes|nullable|string|max:10',
                'address'     => 'sometimes|nullable|string|max:255',
                'city'        => 'sometimes|nullable|string|max:100',
                'state'       => 'sometimes|nullable|string|max:100',
                'postal_code' => 'sometimes|nullable|string|max:20',
                'country'     => 'sometimes|nullable|string|max:50',
-               'avatar'      => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:10240',
+               'avatar'      => 'sometimes|nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
               ]);
 
-              $customer->update($fields);
-
-              if($request->hasFile('avatar')) {
+              if ($request->hasFile('avatar')) {
                  $path = $request->file('avatar')->store('avatars', 'public');
-
-                 $customer->avatar = rtrim(env('APP_URL'), '/') . '/storage/' . $path;
-
-                 $customer->save();
+                 $appUrl = env('APP_URL') ?: 'http://127.0.0.1:8001';
+                 $baseUrl = rtrim($appUrl, '/');
+                 $fields['avatar'] = $baseUrl . '/storage/' . $path;
+              } else {
+                 unset($fields['avatar']);
               }
+
+              $customer->update($fields);
 
               return response()->json([
                  'message' => 'Successfully updated customer',

@@ -28,22 +28,26 @@ export const MenuBoard: React.FC = () => {
     const fetchMenu = async () => {
       try {
         setLoading(true);
-        const response = await api.get('api/menu');
-        const items = response.data.items || [];
+        const [menuRes, pricesRes] = await Promise.all([
+          api.get('api/menu'),
+          api.get('api/menu/item-prices').catch(() => ({ data: { item_prices: [] } }))
+        ]);
 
-        // Fetch prices in parallel for all items to speed up
-        const itemsWithPrices = await Promise.all(
-          items.map(async (item: any) => {
-            try {
-              const priceRes = await api.get(`api/menu/item-prices/${item.id}`);
-              item.real_price = priceRes.data.item_price?.price ?? null;
-            } catch (err) {
-              console.error(`Error fetching price for item ${item.id}:`, err);
-              item.real_price = null;
-            }
-            return item;
-          })
-        );
+        const items = menuRes.data.items || [];
+        const allPrices = pricesRes.data.item_prices || [];
+
+        // Build price lookup map
+        const priceMap: Record<number, number> = {};
+        allPrices.forEach((p: any) => {
+          if (p.item_id && (priceMap[p.item_id] === undefined || Number(p.price) < priceMap[p.item_id])) {
+            priceMap[p.item_id] = Number(p.price);
+          }
+        });
+
+        const itemsWithPrices = items.map((item: any) => ({
+          ...item,
+          real_price: priceMap[item.id] !== undefined ? priceMap[item.id] : null
+        }));
 
         // Group by category name
         const groups: Record<string, MenuItem[]> = {};
