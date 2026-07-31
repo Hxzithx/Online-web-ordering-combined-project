@@ -19,6 +19,11 @@ export const Loader: React.FC<LoaderProps> = ({
       <div className="granny-spinner-ring">
         <i className="fa fa-cutlery granny-loader-icon"></i>
       </div>
+      {text && (
+        <p style={{ color: '#c59d5f', marginTop: '15px', fontFamily: 'Raleway', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '12px', fontWeight: 'bold' }}>
+          {text}
+        </p>
+      )}
 
       {/* Optional Skeleton Grid/List */}
       {showSkeletons && (

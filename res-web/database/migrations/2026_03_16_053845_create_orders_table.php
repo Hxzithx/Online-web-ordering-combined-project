@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('table_merge_id')->nullable();
             
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('steward_id')->constrained('users');
+            $table->foreignId('steward_id')->constrained('users')->nullable();
 
             $table->unsignedBigInteger('order_type_id');
 

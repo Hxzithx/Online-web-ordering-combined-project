@@ -26,6 +26,8 @@ Route::prefix('user')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 });
+Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 Route::post('/auth/google', [GoogleController::class, 'handleGoogleLogin']);
 Route::middleware('auth:sanctum')->group(function () {
 

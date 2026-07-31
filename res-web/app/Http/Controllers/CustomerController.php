@@ -150,7 +150,7 @@ class CustomerController extends Controller implements HasMiddleware
 
               if ($request->hasFile('avatar')) {
                  $path = $request->file('avatar')->store('avatars', 'public');
-                 $appUrl = env('APP_URL') ?: 'http://127.0.0.1:8001';
+                 $appUrl = env('APP_URL') ?: 'http://127.0.0.1:8000';
                  $baseUrl = rtrim($appUrl, '/');
                  $fields['avatar'] = $baseUrl . '/storage/' . $path;
               } else {

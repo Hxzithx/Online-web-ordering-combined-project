@@ -150,16 +150,10 @@ class OrderController extends Controller implements HasMiddleware
              ],422);
            }
 
-           if(empty($customer->phone) || empty($customer->address)) {
-                return response()->json([
-                   'message' => 'Complete profile first'
-               ],422);
-             }
-
            //validate table availability if provided
            if(isset($fields['table_id'])){
               $table = Table::find($fields['table_id']);
-               if($table->status === 'maintenance'){
+               if($table && $table->status === 'maintenance'){
                  return response()->json([
                     'message' => 'Can not create order for table under maintenance', 
                  ],422);
@@ -181,7 +175,7 @@ class OrderController extends Controller implements HasMiddleware
               'customer_name' => $fields['customer_name'] ?? null,
               'customer_id' => $fields['customer_id'] ?? null,
               'status' => $fields['status'] ?? 'pending',
-              'reserved_seat' => $fields['reserved_seat'] ?? null,
+              'reserved_seats' => $fields['reserved_seats'] ?? null,
               'discount_amount' => $fields['discount_amount'] ?? null,
               'tax_amount' => $fields['tax_amount'] ?? null,
               'service_charge' => $fields['service_charge'] ?? null,
@@ -198,8 +192,7 @@ class OrderController extends Controller implements HasMiddleware
            //add order items
            $itemTotal = 0;
            foreach($fields['items'] as $itemData){
-             $itemTotal = $itemData['price'] * $itemData['quantity'];
-             $itemTotal += $itemTotal;
+             $itemTotal += ($itemData['price'] * $itemData['quantity']);
 
              $orderItem = $order->orderItems()->create([
                 'item_id' => $itemData['item_id'],
