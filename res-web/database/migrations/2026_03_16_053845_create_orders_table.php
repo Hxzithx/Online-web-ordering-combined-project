@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('table_merge_id')->nullable();
             
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('steward_id')->constrained('users')->nullable();
+            $table->foreignId('steward_id')->nullable()->constrained('users');
 
             $table->unsignedBigInteger('order_type_id');
 
@@ -31,10 +31,10 @@ return new class extends Migration
             $table->integer('reserved_seats')->nullable();
 
             $table->decimal('total_amount', 10, 2);
-            $table->decimal('discount_amount', 10, 2)->default(0);
-            $table->decimal('tax_amount', 10, 2)->default(0);
-            $table->decimal('service_charge', 10, 2)->default(0);
-            $table->decimal('packaging_charge', 10, 2)->default(0);
+            $table->decimal('discount_amount', 10, 2)->nullable()->default(0);
+            $table->decimal('tax_amount', 10, 2)->nullable()->default(0);
+            $table->decimal('service_charge', 10, 2)->nullable()->default(0);
+            $table->decimal('packaging_charge', 10, 2)->nullable()->default(0);
 
             $table->string('payment_status')->default('pending');
             $table->string('payment_method')->nullable();

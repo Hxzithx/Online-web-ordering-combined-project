@@ -14,13 +14,16 @@ return new class extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('order_type_id')->constrained('order_types');
+            $table->foreignId('order_type_id')->nullable()->constrained('order_types');
             $table->foreignId('item_id')->constrained();
+            $table->foreignId('portion_id')->nullable()->constrained('portions');
+            $table->foreignId('variant_id')->nullable()->constrained('variants');
             $table->unsignedBigInteger('extra_service_id')->nullable();
             $table->unsignedBigInteger('package_id')->nullable();
             $table->integer('quantity');
-            $table->decimal('unit_price', 10, 2);
-            $table->decimal('subtotal', 10, 2);
+            $table->decimal('price', 10, 2)->nullable()->default(0);
+            $table->decimal('unit_price', 10, 2)->nullable()->default(0);
+            $table->decimal('subtotal', 10, 2)->nullable()->default(0);
             $table->decimal('discount_amount', 10, 2)->default(0);
             $table->decimal('discount_percentage', 5, 2)->default(0);
             $table->decimal('service_charge_amount', 10, 2)->default(0);
@@ -28,7 +31,7 @@ return new class extends Migration
             $table->decimal('tax_amount', 10, 2)->default(0);
             $table->decimal('tax_percentage', 5, 2)->default(0);
             $table->text('notes')->nullable();
-            $table->unsignedBigInteger('kitchen_id')->constrained()->nullable();
+            $table->unsignedBigInteger('kitchen_id')->nullable();
             $table->string('status')->default('pending');
             $table->timestamp('added_at')->nullable();
             $table->timestamp('accepted_at')->nullable();
@@ -36,7 +39,7 @@ return new class extends Migration
             $table->timestamp('completed_at')->nullable();
             $table->timestamp('cancelled_at')->nullable();
             $table->boolean('is_voided')->default(false);
-            $table->text('void_reason');
+            $table->text('void_reason')->nullable();
             $table->foreignId('voided_by')->nullable()->constrained('users');
             $table->timestamps();
         });

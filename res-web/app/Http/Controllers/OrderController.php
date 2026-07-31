@@ -176,10 +176,10 @@ class OrderController extends Controller implements HasMiddleware
               'customer_id' => $fields['customer_id'] ?? null,
               'status' => $fields['status'] ?? 'pending',
               'reserved_seats' => $fields['reserved_seats'] ?? null,
-              'discount_amount' => $fields['discount_amount'] ?? null,
-              'tax_amount' => $fields['tax_amount'] ?? null,
-              'service_charge' => $fields['service_charge'] ?? null,
-              'packaging_charge' => $fields['packaging_charge'] ?? null,
+              'discount_amount' => $fields['discount_amount'] ?? 0,
+              'tax_amount' => $fields['tax_amount'] ?? 0,
+              'service_charge' => $fields['service_charge'] ?? 0,
+              'packaging_charge' => $fields['packaging_charge'] ?? 0,
               'payment_status' => $fields['payment_status'] ?? 'pending',
               'payment_method' => $fields['payment_method'] ?? null,
               'notes' => $fields['notes'] ?? null,
@@ -195,9 +195,12 @@ class OrderController extends Controller implements HasMiddleware
              $itemTotal += ($itemData['price'] * $itemData['quantity']);
 
              $orderItem = $order->orderItems()->create([
+                'order_type_id' => $fields['order_type_id'],
                 'item_id' => $itemData['item_id'],
                 'quantity' => $itemData['quantity'],
                 'price' => $itemData['price'],
+                'unit_price' => $itemData['price'],
+                'subtotal' => $itemData['price'] * $itemData['quantity'],
                 'variant_id' => $itemData['variant_id'] ?? null,
                 'portion_id' => $itemData['portion_id'] ?? null,
                 'notes' => $itemData['notes'] ?? null,

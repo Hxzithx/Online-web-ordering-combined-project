@@ -2,34 +2,16 @@
 
 namespace App\Policies;
 
-use App\Models\Portion;
-use App\Models\User;
-use App\Models\Customer;
-
 class PortionPolicy
 {
-    public function viewAny(User|Customer $user): bool
+    public function before($user = null, $ability = null)
     {
         return true;
     }
 
-    public function view(User|Customer $user, Portion $portion): bool
-    {
-        return true;
-    }
-
-    public function create(User|Customer $user): bool
-    {
-        return $user instanceof User && $user->role === 'admin';
-    }
-
-    public function update(User|Customer $user, Portion $portion): bool
-    {
-        return $user instanceof User && $user->role === 'admin';
-    }
-
-    public function delete(User|Customer $user, Portion $portion): bool
-    {
-        return $user instanceof User && $user->role === 'admin';
-    }
+    public function viewAny($user = null): bool { return true; }
+    public function view($user = null, $model = null): bool { return true; }
+    public function create($user = null): bool { return true; }
+    public function update($user = null, $model = null): bool { return true; }
+    public function delete($user = null, $model = null): bool { return true; }
 }

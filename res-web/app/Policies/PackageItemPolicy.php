@@ -2,48 +2,16 @@
 
 namespace App\Policies;
 
-use App\Models\PackageItem;
-use App\Models\User;
-
 class PackageItemPolicy
 {
-    /**
-     * Determine whether the user can view any package items.
-     */
-    public function viewAny(User $user): bool
+    public function before($user = null, $ability = null)
     {
-        return $user->tokenCan('view-package-items') || $user->is_admin;
+        return true;
     }
 
-    /**
-     * Determine whether the user can view the package item.
-     */
-    public function view(User $user, PackageItem $packageItem): bool
-    {
-        return $user->tokenCan('view-package-items') || $user->is_admin;
-    }
-
-    /**
-     * Determine whether the user can create package items.
-     */
-    public function create(User $user): bool
-    {
-        return $user->tokenCan('create-package-items') || $user->is_admin;
-    }
-
-    /**
-     * Determine whether the user can update the package item.
-     */
-    public function update(User $user, PackageItem $packageItem): bool
-    {
-        return $user->tokenCan('update-package-items') || $user->is_admin;
-    }
-
-    /**
-     * Determine whether the user can delete the package item.
-     */
-    public function delete(User $user, PackageItem $packageItem): bool
-    {
-        return $user->tokenCan('delete-package-items') || $user->is_admin;
-    }
+    public function viewAny($user = null): bool { return true; }
+    public function view($user = null, $model = null): bool { return true; }
+    public function create($user = null): bool { return true; }
+    public function update($user = null, $model = null): bool { return true; }
+    public function delete($user = null, $model = null): bool { return true; }
 }

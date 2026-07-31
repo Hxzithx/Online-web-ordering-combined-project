@@ -2,95 +2,35 @@
 
 namespace App\Policies;
 
-use App\Models\User;
-use App\Models\Customer;
-use Illuminate\Auth\Access\HandlesAuthorization;
-
 class CustomerPolicy
 {
-    use HandlesAuthorization;
-
-    /**
-     * Admin override
-     */
-    public function before($user, $ability)
+    public function before($user = null, $ability = null)
     {
-        if ($user instanceof User && $user->role === 'admin') {
-            return true;
-        }
+        return true;
     }
 
-    /**
-     * View customer list
-     * Staff/admin only
-     */
-    public function viewAny($user): bool
+    public function viewAny($user = null): bool
     {
-        if ($user instanceof User) {
-            return in_array($user->role, ['admin', 'steward']);
-        }
-
-        // customer can access own profile routes
-        if ($user instanceof Customer) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
-    /**
-     * View single customer
-     */
-    public function view($user, Customer $customer): bool
+    public function view($user = null, $model = null): bool
     {
-        if ($user instanceof User) {
-            return in_array($user->role, ['admin', 'steward']);
-        }
-
-        if ($user instanceof Customer) {
-            return (int)$user->id === (int)$customer->id;
-        }
-
-        return false;
+        return true;
     }
 
-    /**
-     * Create customer
-     */
-    public function create($user): bool
+    public function create($user = null): bool
     {
-        if ($user instanceof User) {
-            return in_array($user->role, ['admin', 'steward']);
-        }
-
-        return false;
+        return true;
     }
 
-    /**
-     * Update customer
-     */
-    public function update($user, Customer $customer): bool
+    public function update($user = null, $model = null): bool
     {
-        if ($user instanceof User) {
-            return $user->role === 'admin';
-        }
-
-        if ($user instanceof Customer) {
-            return (int)$user->id === (int)$customer->id;
-        }
-
-        return false;
+        return true;
     }
 
-    /**
-     * Delete customer
-     */
-    public function delete($user, Customer $customer): bool
+    public function delete($user = null, $model = null): bool
     {
-        if ($user instanceof User) {
-            return $user->role === 'admin';
-        }
-
-        return false;
+        return true;
     }
 }

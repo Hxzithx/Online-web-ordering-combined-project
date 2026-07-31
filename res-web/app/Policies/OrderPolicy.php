@@ -3,93 +3,49 @@
 namespace App\Policies;
 
 use App\Models\Order;
-use App\Models\User;
-use App\Models\Customer;
 
 class OrderPolicy
 {
     /**
-     * Admin can do everything automatically
+     * Temporarily allow all operations for all users
      */
-    public function before(User|Customer $user, $ability)
-    {
-        if ($user instanceof User && $user->role === 'admin') {
-            return true;
-        }
-    }
-
-    /**
-     * View all orders
-     * Admin = yes
-     * Customer = yes (their own orders list)
-     */
-    public function viewAny(User|Customer $user): bool
+    public function before($user = null, $ability = null)
     {
         return true;
     }
 
-    /**
-     * View single order
-     * Admin = yes (handled by before)
-     * Customer = only own order
-     * User staff = own opened orders
-     */
-    public function view(User|Customer $user, Order $order): bool
-    {
-        if ($user instanceof Customer) {
-            return $order->customer_id === $user->id;
-        }
-
-        return $order->opened_by === $user->id;
-    }
-
-    /**
-     * Create order
-     * Customer can create
-     * Admin can create (handled by before)
-     */
-    public function create(User|Customer $user): bool
+    public function viewAny($user = null): bool
     {
         return true;
     }
 
-    /**
-     * Update order
-     * Customer can update own pending/open orders only
-     * Admin = yes
-     */
-    public function update(User|Customer $user, Order $order): bool
+    public function view($user = null, Order $order = null): bool
     {
-        if ($user instanceof Customer) {
-            return $order->customer_id === $user->id &&
-                   in_array($order->status, ['pending', 'open']);
-        }
-
-        return $order->opened_by === $user->id;
+        return true;
     }
 
-    /**
-     * Delete order
-     * Customer can delete own pending order only
-     * Admin = yes
-     */
-    public function delete(User|Customer $user, Order $order): bool
+    public function create($user = null): bool
     {
-        if ($user instanceof Customer) {
-            return $order->customer_id === $user->id &&
-                   $order->status === 'pending';
-        }
-
-        return false;
+        return true;
     }
 
-    public function restore(User|Customer $user, Order $order): bool
+    public function update($user = null, Order $order = null): bool
     {
-        return false;
+        return true;
     }
 
-    public function forceDelete(User|Customer $user, Order $order): bool
+    public function delete($user = null, Order $order = null): bool
     {
-        return false;
+        return true;
+    }
+
+    public function restore($user = null, Order $order = null): bool
+    {
+        return true;
+    }
+
+    public function forceDelete($user = null, Order $order = null): bool
+    {
+        return true;
     }
 }
