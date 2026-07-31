@@ -17,7 +17,7 @@ import ShopSingle from './pages/ShopSingle';
 import ShopCart from './pages/ShopCart';
 import Profile from './pages/Profile';
 import Reservation from './pages/Reservation';
-import OrderSummary from './pages/OrderSummary';
+// import OrderSummary from './pages/OrderSummary';
 import MyOrders from './pages/MyOrders';
 
 // Helper static pages
@@ -113,11 +113,7 @@ export const App: React.FC = () => {
                 <Reservation />
               </PrivateRoute>
             } />
-            <Route path="/order-summary" element={
-              <PrivateRoute>
-                <OrderSummary />
-              </PrivateRoute>
-            } />
+
             <Route path="/my-orders" element={
               <PrivateRoute>
                 <MyOrders />
