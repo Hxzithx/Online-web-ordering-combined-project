@@ -37,48 +37,48 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     //orders
-    Route::get('/orders',                [OrderController::class, 'index']);   // list own orders
-    Route::post('/order',                [OrderController::class, 'store']);   // place new order + table booking
-    Route::get('/orders/{order}',        [OrderController::class, 'show']);    // view single order
+    Route::get('/orders', [OrderController::class, 'index']);   // list own orders
+    Route::post('/order', [OrderController::class, 'store']);   // place new order + table booking
+    Route::get('/orders/{order}', [OrderController::class, 'show']);    // view single order
     Route::get('/orders/{order}/status', [OrderController::class, 'status']); // track status
     Route::patch('/orders/{order}/cancel', [OrderController::class, 'cancel']); // cancel order
     Route::patch('/orders/{order}/confirm-payment', [OrderController::class, 'confirmPayment']);  // confirm card payment
     Route::get('orders/{order}/items', [OrderItemController::class, 'index']); //get all order items
     //addon
-    Route::get('/add-ons',             [AddOnController::class, 'index']); // basic add ons
+    Route::get('/add-ons', [AddOnController::class, 'index']); // basic add ons
 
 
     //portion
     Route::prefix('portions')->group(function () {
-        Route::get('/',  [PortionController::class, 'index']);
+        Route::get('/', [PortionController::class, 'index']);
     });
 
     //order item add ons
     Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/order-items/{order_item_id}/add-ons',  [OrderItemAdOnController::class, 'index']);
-        Route::post('order-items/{order_item_id}/add-ons',  [OrderItemAdOnController::class, 'store']);
+        Route::get('/order-items/{order_item_id}/add-ons', [OrderItemAdOnController::class, 'index']);
+        Route::post('order-items/{order_item_id}/add-ons', [OrderItemAdOnController::class, 'store']);
 
         //tables with merge
         Route::prefix('tables')->group(function () {
-            Route::get('/',            [TableController::class, 'index']); //get all tables
-            Route::get('/available',   [TableController::class, 'available']);
-            Route::put('/{table_id}/update',  [TableController::class], 'update'); //update the table
+            Route::get('/', [TableController::class, 'index']); //get all tables
+            Route::get('/available', [TableController::class, 'available']);
+            Route::put('/{table_id}/update', [TableController::class], 'update'); //update the table
             Route::delete('/{table_id}/delete', [TableController::class], 'destroy'); //delete the table
-            Route::get('/merge',            [TableMergeController::class, 'index']); //get all the merges
-            Route::post('/merge',      [TableMergeController::class, 'store']); //create table merge
-            Route::get('/available-merges',   [TableController::class, 'available']); //browse available tables
-            Route::get('/merges',      [TableMergeController::class, 'active']); //view active merges
-            Route::post('/merge',      [TableMergeController::class, 'merge']); //request a merge table
+            Route::get('/merge', [TableMergeController::class, 'index']); //get all the merges
+            Route::post('/merge', [TableMergeController::class, 'store']); //create table merge
+            Route::get('/available-merges', [TableController::class, 'available']); //browse available tables
+            Route::get('/merges', [TableMergeController::class, 'active']); //view active merges
+            Route::post('/merge', [TableMergeController::class, 'merge']); //request a merge table
         });
 
         //customers
         Route::prefix('customer')->group(function () {
             Route::get('/profile', [CustomerController::class, 'profile']);
-            Route::get('/',   [CustomerController::class, 'index']);
-            Route::post('/',   [CustomerController::class, 'store']);
-            Route::get('/{customer_id}',  [CustomerController::class, 'show']);
-            Route::match(['post', 'put'], '/profile',  [CustomerController::class, 'update']);
-            Route::delete('/{customer_id}/delete',  [CustomerController::class, 'destroy']);
+            Route::get('/', [CustomerController::class, 'index']);
+            Route::post('/', [CustomerController::class, 'store']);
+            Route::get('/{customer_id}', [CustomerController::class, 'show']);
+            Route::match(['post', 'put'], '/profile', [CustomerController::class, 'update']);
+            Route::delete('/{customer_id}/delete', [CustomerController::class, 'destroy']);
         });
 
         //items
@@ -104,7 +104,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/', [PackageController::class, 'index']); //get all packages  
             Route::post('/', [PackageController::class, 'store']);
             Route::get('/{package_id}', [PackageController::class, 'show']);
-            Route::put('/{package_id}', [PackageController::class,  'update']);
+            Route::put('/{package_id}', [PackageController::class, 'update']);
             Route::delete('/{package_id}', [PackageController::class, 'destroy']);
         });
 
