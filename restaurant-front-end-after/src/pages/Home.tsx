@@ -117,7 +117,7 @@ export const Home: React.FC = () => {
                 <div className="divider--shape-4" style={{ width: '80px', height: '2px', backgroundColor: '#c59d5f', margin: '15px auto' }}></div>
               </div>
               <p style={{ color: '#a5a5a5', fontSize: '14px', lineHeight: '26px' }}>
-                Granny restaurant has been serving gourmet delicacies with premium ingredients and unmatched service since 1995. We invite you to experience our signature steak cuts, wood-fired recipes, and craft beverages prepared by expert chefs in an atmospheric setting.
+                Granny restaurant has been serving gourmet delicacies with premium ingredients and unmatched service since 1995. We invite you to experience our zature steak cuts, wood-fired recipes, and craft beverages prepared by expert chefs in an atmospheric setting.
               </p>
               <Link to="/about" className="btn btn--secondary btn--link" style={{ borderBottom: '1px solid #c59d5f', color: '#c59d5f', textTransform: 'uppercase', fontSize: '11px', letterSpacing: '2px', fontWeight: 'bold', marginTop: '20px', display: 'inline-block', textDecoration: 'none' }}>
                 Our Story

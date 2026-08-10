@@ -239,8 +239,27 @@ export const Header: React.FC = () => {
             )}
 
             {!isAuthenticated && (
-              <div className="module" style={{ marginLeft: '15px' }}>
-                <Link to="/login" className="btn btn--white btn--bordered btn--sm" style={{ height: '40px', padding: '10px 20px', border: '2px solid #c59d5f', color: '#c59d5f', textTransform: 'uppercase', fontSize: '11px', fontWeight: 'bold' }}>
+              <div className="module" style={{ marginLeft: '15px', display: 'flex', alignItems: 'center' }}>
+                <Link
+                  to="/login"
+                  className="btn btn--white btn--bordered btn--sm"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '40px',
+                    lineHeight: '1',
+                    padding: '0 20px',
+                    width: 'auto',
+                    border: '2px solid #c59d5f',
+                    color: '#c59d5f',
+                    textTransform: 'uppercase',
+                    fontSize: '11px',
+                    fontWeight: 'bold',
+                    borderRadius: '4px',
+                    boxSizing: 'border-box'
+                  }}
+                >
                   Sign In
                 </Link>
               </div>
