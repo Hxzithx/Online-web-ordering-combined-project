@@ -14,7 +14,7 @@ export const getAvatarUrl = (avatarPath?: string | null): string | null => {
   ) {
     return avatarPath;
   }
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/';
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://${import.meta.env.VITE_API_BASE_URL}/';
   const cleanBase = apiBaseUrl.endsWith('/') ? apiBaseUrl : `${apiBaseUrl}/`;
   const cleanPath = avatarPath.startsWith('/') ? avatarPath.substring(1) : avatarPath;
 
@@ -33,7 +33,7 @@ export const Profile: React.FC = () => {
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [imgError, setImgError] = useState(false);
-  
+
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
 
@@ -43,12 +43,12 @@ export const Profile: React.FC = () => {
         setFetching(true);
         const response = await api.get('api/customer/profile');
         const customer = response.data.customer || response.data;
-        
+
         const fullName = `${customer.first_name || ''} ${customer.last_name || ''}`.trim();
         setName(fullName || (user ? `${user.first_name} ${user.last_name}` : ''));
         setPhone(customer.phone || '');
         setAddress(customer.address || '');
-        
+
         const avatar = customer.avatar || user?.avatar;
         if (avatar) {
           setAvatarPreview(getAvatarUrl(avatar));
@@ -86,7 +86,7 @@ export const Profile: React.FC = () => {
     formData.append('last_name', lastName);
     formData.append('phone', phone);
     formData.append('address', address);
-    
+
     if (avatarFile) {
       formData.append('avatar', avatarFile);
     }
@@ -99,7 +99,7 @@ export const Profile: React.FC = () => {
       });
 
       const updatedCustomer = response.data.customer;
-      
+
       const newAvatarUrl = getAvatarUrl(updatedCustomer.avatar);
       if (newAvatarUrl) {
         setAvatarPreview(newAvatarUrl);
