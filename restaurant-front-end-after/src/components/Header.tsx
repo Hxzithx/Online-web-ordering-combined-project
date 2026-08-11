@@ -63,35 +63,36 @@ export const Header: React.FC = () => {
       <nav id="primary-menu" className="navbar navbar-fixed-top sticky-navbar affix">
         <div className="container">
           <div className="navbar-header">
+            <Link className="logo" to="/home">
+              <img className="logo-light" src="/assets/images/logo/logo-light.png" alt="logo" />
+              <img className="logo-dark" src="/assets/images/logo/logo-dark.png" alt="logo" />
+            </Link>
             <button
               type="button"
               className="navbar-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
+              aria-label="Toggle navigation"
             >
               <span className="sr-only">Toggle navigation</span>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link className="logo" to="/home">
-              <img className="logo-light" src="/assets/images/logo/logo-light.png" alt="logo" />
-              <img className="logo-dark" src="/assets/images/logo/logo-dark.png" alt="logo" />
-            </Link>
           </div>
 
           <div
-            className={`collapse navbar-collapse pull-right ${mobileMenuOpen ? 'in' : ''}`}
+            className={`collapse navbar-collapse ${mobileMenuOpen ? 'in' : ''}`}
             style={{ display: mobileMenuOpen ? 'block' : undefined }}
           >
-            <ul className="nav navbar-nav" style={{ display: 'flex', alignItems: 'center', gap: '16px', margin: 0, padding: 0 }}>
-              <li className={location.pathname === '/home' ? 'active' : ''} style={{ margin: 0, padding: 0 }}>
-                <Link to="/home" className="menu-item" style={{ padding: '0 8px', margin: 0 }}>home</Link>
+            <ul className="nav navbar-nav">
+              <li className={location.pathname === '/home' ? 'active' : ''}>
+                <Link to="/home" className="menu-item">home</Link>
               </li>
 
-              <li className={`has-dropdown ${activeDropdown === 'about' ? 'open' : ''}`} style={{ margin: 0, padding: 0 }}>
-                <a href="#" onClick={(e) => toggleDropdown('about', e)} className="dropdown-toggle menu-item" style={{ padding: '0 8px', margin: 0 }}>
-                  About
+              <li className={`has-dropdown ${activeDropdown === 'about' ? 'open' : ''}`}>
+                <a href="#" onClick={(e) => toggleDropdown('about', e)} className="dropdown-toggle menu-item">
+                  About <i className="fa fa-angle-down" style={{ marginLeft: '6px' }}></i>
                 </a>
                 <ul className="dropdown-menu">
                   <li><Link to="/about">our story</Link></li>
@@ -103,17 +104,17 @@ export const Header: React.FC = () => {
                 </ul>
               </li>
 
-              <li className={location.pathname === '/menu' ? 'active' : ''} style={{ margin: 0, padding: 0 }}>
-                <Link to="/menu" className="menu-item" style={{ padding: '0 8px', margin: 0 }}>menu</Link>
+              <li className={location.pathname === '/menu' ? 'active' : ''}>
+                <Link to="/menu" className="menu-item">menu</Link>
               </li>
 
-              <li className={location.pathname === '/blog' ? 'active' : ''} style={{ margin: 0, padding: 0 }}>
-                <Link to="/blog" className="menu-item" style={{ padding: '0 8px', margin: 0 }}>blog</Link>
+              <li className={location.pathname === '/blog' ? 'active' : ''}>
+                <Link to="/blog" className="menu-item">blog</Link>
               </li>
 
-              <li className={`has-dropdown ${activeDropdown === 'shop' ? 'open' : ''}`} style={{ margin: 0, padding: 0 }}>
-                <a href="#" onClick={(e) => toggleDropdown('shop', e)} className="dropdown-toggle menu-item" style={{ padding: '0 8px', margin: 0 }}>
-                  shop
+              <li className={`has-dropdown ${activeDropdown === 'shop' ? 'open' : ''}`}>
+                <a href="#" onClick={(e) => toggleDropdown('shop', e)} className="dropdown-toggle menu-item">
+                  shop <i className="fa fa-angle-down" style={{ marginLeft: '6px' }}></i>
                 </a>
                 <ul className="dropdown-menu">
                   <li><Link to="/shop">shop products</Link></li>
@@ -127,22 +128,22 @@ export const Header: React.FC = () => {
               </li>
             </ul>
 
-            <div className="module module-social pull-left">
+            <div className="module module-social">
               <a href="https://facebook.com" target="_blank" rel="noreferrer"><i className="fa fa-facebook"></i></a>
               <a href="https://twitter.com" target="_blank" rel="noreferrer"><i className="fa fa-twitter"></i></a>
               <a href="https://instagram.com" target="_blank" rel="noreferrer"><i className="fa fa-instagram"></i></a>
               <a href="https://tripadvisor.com" target="_blank" rel="noreferrer"><i className="fa fa-tripadvisor"></i></a>
             </div>
 
-            <div className="module module-reservation" style={{ display: 'flex', alignItems: 'center', height: '90px', margin: 0, padding: 0 }}>
-              <Link to="/reservation" className="btn btn-popup" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', height: '40px', padding: '0 24px', lineHeight: '40px', borderRadius: '30px', margin: 0 }}>
+            <div className="module module-reservation">
+              <Link to="/reservation" className="btn btn-popup">
                 <i className="lnr lnr-users" style={{ marginRight: '8px', fontSize: '14px' }}></i>Reservation
               </Link>
             </div>
 
             {/* Profile Dropdown */}
             {isAuthenticated && user && (
-              <div className="module module-profile" style={{ margin: 0, position: 'relative', display: 'flex', alignItems: 'center' }}>
+              <div className="module module-profile" style={{ position: 'relative' }}>
                 <div className="dropdown profile-dropdown">
                   <a
                     href="#"
@@ -178,7 +179,6 @@ export const Header: React.FC = () => {
                       boxShadow: '0 20px 60px rgba(0,0,0,0.6)',
                       listStyle: 'none', padding: 0,
                     }}>
-
                       {/* Header */}
                       <li style={{ padding: '18px 18px 14px', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: '12px' }}>
                         <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'linear-gradient(135deg, #7a5a20, #c8a96e)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Georgia, serif', fontSize: '17px', fontWeight: 700, color: '#111', flexShrink: 0, border: '2px solid rgba(200,169,110,0.4)', overflow: 'hidden' }}>
@@ -231,7 +231,6 @@ export const Header: React.FC = () => {
                           </button>
                         </form>
                       </li>
-
                     </ul>
                   )}
                 </div>
@@ -271,3 +270,4 @@ export const Header: React.FC = () => {
   );
 };
 export default Header;
+

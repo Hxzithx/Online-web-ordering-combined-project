@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="row" style={{ marginTop: '30px' }}>
-          <div className="col-xs-12 col-sm-4 col-md-4">
+          <div className="col-xs-12 col-sm-4 col-md-4" style={{ marginBottom: '25px' }}>
             <div className="footer-widget" style={{ color: '#f0ebe0' }}>
               <h5 style={{ color: '#c59d5f', fontFamily: 'Raleway', fontWeight: 700, textTransform: 'uppercase', fontSize: '12px', letterSpacing: '2px', marginBottom: '15px' }}>Contact Us</h5>
               <p style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '13px', lineHeight: '22px' }}>
@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
           
-          <div className="col-xs-12 col-sm-4 col-md-4">
+          <div className="col-xs-12 col-sm-4 col-md-4" style={{ marginBottom: '25px' }}>
             <div className="footer-widget" style={{ color: '#f0ebe0' }}>
               <h5 style={{ color: '#c59d5f', fontFamily: 'Raleway', fontWeight: 700, textTransform: 'uppercase', fontSize: '12px', letterSpacing: '2px', marginBottom: '15px' }}>Opening Hours</h5>
               <p style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '13px', lineHeight: '22px' }}>
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
           
-          <div className="col-xs-12 col-sm-4 col-md-4">
+          <div className="col-xs-12 col-sm-4 col-md-4" style={{ marginBottom: '25px' }}>
             <div className="footer-widget" style={{ color: '#f0ebe0' }}>
               <h5 style={{ color: '#c59d5f', fontFamily: 'Raleway', fontWeight: 700, textTransform: 'uppercase', fontSize: '12px', letterSpacing: '2px', marginBottom: '15px' }}>Quick Links</h5>
               <ul className="list-unstyled" style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '13px', lineHeight: '24px' }}>

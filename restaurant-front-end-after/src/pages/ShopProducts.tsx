@@ -259,7 +259,7 @@ export const ShopProducts: React.FC = () => {
                   <div className="widget--title" style={{ borderBottom: '2px solid #c59d5f', paddingBottom: '10px', marginBottom: '20px' }}>
                     <h5 style={{ fontFamily: 'Raleway', fontWeight: 'bold', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '2px', color: '#222', margin: 0 }}>Categories</h5>
                   </div>
-                  <div className="widget--content" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div className="widget--content" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     {categoriesList.map((cat) => (
                       <a
                         key={cat}
@@ -270,8 +270,9 @@ export const ShopProducts: React.FC = () => {
                         }}
                         className={`tag-btn ${cat === selectedCategory ? 'active' : ''}`}
                         style={{
-                          display: 'block',
-                          padding: '8px 12px',
+                          display: 'inline-block',
+                          padding: '6px 14px',
+                          borderRadius: '20px',
                           border: cat === selectedCategory ? '1px solid #c59d5f' : '1px solid #f0f0f0',
                           backgroundColor: cat === selectedCategory ? '#c59d5f' : '#f9f9f9',
                           color: cat === selectedCategory ? '#fff' : '#222',
@@ -279,10 +280,7 @@ export const ShopProducts: React.FC = () => {
                           fontWeight: 'bold',
                           fontSize: '11px',
                           textTransform: 'uppercase',
-                          letterSpacing: '1px',
-                          textAlign: 'center',
                           textDecoration: 'none',
-                          borderRadius: '2px',
                           transition: 'all 0.2s',
                         }}
                       >
