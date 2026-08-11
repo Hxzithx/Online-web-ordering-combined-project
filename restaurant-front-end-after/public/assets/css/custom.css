@@ -2808,64 +2808,290 @@
     overflow: hidden !important;
 }
 
-/* Straight Header Navigation Bar */
-.header .container {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    height: 90px !important;
+/* Straight Header Navigation Bar - Responsive System */
+@media (min-width: 992px) {
+    .header .container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        height: 80px !important;
+    }
+    .header .navbar-collapse {
+        display: flex !important;
+        align-items: center !important;
+        gap: 20px !important;
+        float: none !important;
+        height: 80px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    .header .navbar-nav {
+        display: flex !important;
+        align-items: center !important;
+        gap: 14px !important;
+        float: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 80px !important;
+    }
+    .header .navbar-nav > li {
+        float: none !important;
+        display: flex !important;
+        align-items: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 80px !important;
+    }
+    .header .navbar-nav > li > a {
+        display: flex !important;
+        align-items: center !important;
+        height: 80px !important;
+        padding: 0 8px !important;
+        margin: 0 !important;
+        font-family: 'Raleway', sans-serif !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1.5px !important;
+        color: #e5dfd3 !important;
+    }
+    .header .navbar-nav > li > a:hover,
+    .header .navbar-nav > li.active > a {
+        color: #c59d5f !important;
+    }
+    .header .module,
+    .header .module-reservation,
+    .header .module-profile,
+    .header .module-social {
+        float: none !important;
+        display: flex !important;
+        align-items: center !important;
+        align-self: center !important;
+        height: 80px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .header .module-reservation .btn,
+    .header .module-reservation a {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 40px !important;
+        margin: 0 !important;
+        vertical-align: middle !important;
+    }
 }
-.header .navbar-collapse {
-    display: flex !important;
-    align-items: center !important;
-    gap: 24px !important;
-    float: none !important;
-    height: 90px !important;
+
+/* Small Laptops (992px to 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .header .module-social {
+        display: none !important;
+    }
+    .header .navbar-nav > li > a {
+        font-size: 11px !important;
+        padding: 0 5px !important;
+    }
 }
-.header .navbar-nav {
-    display: flex !important;
-    align-items: center !important;
-    gap: 16px !important;
-    float: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    height: 90px !important;
-}
-.header .navbar-nav > li {
-    float: none !important;
-    display: flex !important;
-    align-items: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    height: 90px !important;
-}
-.header .navbar-nav > li > a {
-    display: flex !important;
-    align-items: center !important;
-    height: 90px !important;
-    padding: 0 8px !important;
-    margin: 0 !important;
-}
-.header .module,
-.header .module-reservation,
-.header .module-profile,
-.header .module-social {
-    float: none !important;
-    display: flex !important;
-    align-items: center !important;
-    align-self: center !important;
-    height: 90px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-.header .module-reservation .btn,
-.header .module-reservation a {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: 40px !important;
-    margin: 0 !important;
-    vertical-align: middle !important;
+
+/* Mobile & Tablet Header System (< 992px) */
+@media (max-width: 991px) {
+    .header .container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        height: 64px !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        position: relative !important;
+    }
+
+    .header .navbar-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        float: none !important;
+        margin: 0 !important;
+        height: 64px !important;
+    }
+
+    .header .logo {
+        display: flex !important;
+        align-items: center !important;
+        height: 64px !important;
+        float: none !important;
+        margin: 0 !important;
+        line-height: normal !important;
+    }
+
+    .header .logo img {
+        max-height: 36px !important;
+        width: auto !important;
+    }
+
+    .header .navbar-toggle {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background: rgba(197, 157, 95, 0.12) !important;
+        border: 1px solid rgba(197, 157, 95, 0.5) !important;
+        border-radius: 6px !important;
+        padding: 8px 10px !important;
+        margin: 0 !important;
+        cursor: pointer !important;
+        float: none !important;
+        width: auto !important;
+        height: auto !important;
+        line-height: normal !important;
+    }
+
+    .header .navbar-toggle .icon-bar {
+        background-color: #c59d5f !important;
+        display: block !important;
+        width: 20px !important;
+        height: 2px !important;
+        border-radius: 1px !important;
+        margin-top: 4px !important;
+    }
+    .header .navbar-toggle .icon-bar:first-child {
+        margin-top: 0 !important;
+    }
+
+    .header .navbar-collapse {
+        position: absolute !important;
+        top: 64px !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        background-color: #0e0d0b !important;
+        border-top: 1px solid rgba(197, 157, 95, 0.3) !important;
+        border-bottom: 1px solid rgba(197, 157, 95, 0.3) !important;
+        padding: 20px 15px !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.95) !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+        float: none !important;
+        z-index: 99999 !important;
+        margin: 0 !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+    }
+
+    .header .navbar-collapse:not(.in),
+    .navbar-collapse:not(.in),
+    #primary-menu .navbar-collapse:not(.in),
+    .container > .navbar-collapse:not(.in) {
+        display: none !important;
+    }
+
+    .header .navbar-collapse.in,
+    .navbar-collapse.in,
+    #primary-menu .navbar-collapse.in,
+    .container > .navbar-collapse.in {
+        display: flex !important;
+    }
+
+    .header .navbar-nav {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 0 15px 0 !important;
+        padding: 0 !important;
+        float: none !important;
+        gap: 0 !important;
+    }
+
+    .header .navbar-nav > li {
+        width: 100% !important;
+        float: none !important;
+        display: block !important;
+        height: auto !important;
+        margin: 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .header .navbar-nav > li > a {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 12px 8px !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        letter-spacing: 1.5px !important;
+        color: #f2ede3 !important;
+        text-transform: uppercase !important;
+        text-decoration: none !important;
+        line-height: 1.4 !important;
+    }
+
+    .header .navbar-nav > li > a:hover {
+        color: #c59d5f !important;
+    }
+
+    .header .navbar-nav .dropdown-menu {
+        position: static !important;
+        float: none !important;
+        width: 100% !important;
+        background-color: rgba(255, 255, 255, 0.03) !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 5px 0 10px 15px !important;
+        margin: 0 !important;
+        display: none !important;
+    }
+
+    .header .navbar-nav .has-dropdown.open .dropdown-menu {
+        display: block !important;
+    }
+
+    .header .navbar-nav .dropdown-menu > li > a {
+        display: block !important;
+        color: rgba(242, 237, 227, 0.8) !important;
+        padding: 10px 12px !important;
+        font-size: 12px !important;
+        text-decoration: none !important;
+    }
+
+    .header .module {
+        width: 100% !important;
+        height: auto !important;
+        margin: 10px 0 !important;
+        float: none !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .header .module-reservation .btn {
+        width: 100% !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 22px !important;
+        background-color: #c59d5f !important;
+        color: #fff !important;
+        font-weight: bold !important;
+        text-transform: uppercase !important;
+        font-size: 12px !important;
+        letter-spacing: 1px !important;
+    }
+
+    .header .module-social {
+        display: flex !important;
+        gap: 20px !important;
+        justify-content: center !important;
+        padding: 10px 0 !important;
+        height: auto !important;
+    }
 }
 
 /* Profile Dropdown Hover Effects */
