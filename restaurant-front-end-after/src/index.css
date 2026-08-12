@@ -64,6 +64,12 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 h1,
@@ -452,6 +458,25 @@ header .navbar {
   background: transparent !important;
 }
 
+/* Keep dark header on mobile — theme .header-fixed .affix forces white bg */
+header.header-fixed .navbar.affix {
+  background-color: #0e0d0b !important;
+  box-shadow: none !important;
+}
+
+header.header-fixed .navbar.affix .logo-dark {
+  display: none !important;
+}
+
+header.header-fixed .navbar.affix .logo-light {
+  display: inline-block !important;
+}
+
+/* Content offset for fixed header */
+#wrapper.clearfix > div:nth-child(2) {
+  padding-top: 80px;
+}
+
 /* Desktop Header (992px and above) */
 @media (min-width: 992px) {
   header .navbar > .container {
@@ -621,17 +646,41 @@ header .navbar {
 
 /* Mobile & Tablet Drawer (< 992px) */
 @media (max-width: 991px) {
+  #wrapper.clearfix > div:nth-child(2) {
+    padding-top: 64px;
+  }
+
   .container {
     padding-left: 15px !important;
     padding-right: 15px !important;
   }
 
+  /* Override Bootstrap 768px+ collapse/toggle rules */
+  header .navbar-collapse.collapse {
+    display: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  header .navbar-collapse.collapse.in {
+    display: block !important;
+    height: auto !important;
+    overflow-y: auto !important;
+    visibility: visible !important;
+  }
+
   header .navbar > .container {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
+    display: block !important;
     height: 64px !important;
     position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
   }
 
   header .navbar-header {
@@ -661,13 +710,19 @@ header .navbar {
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    background: rgba(197, 157, 95, 0.1) !important;
+    gap: 4px !important;
+    background: rgba(197, 157, 95, 0.12) !important;
     border: 1px solid rgba(197, 157, 95, 0.5) !important;
     border-radius: 6px !important;
     padding: 8px 10px !important;
-    margin: 0 !important;
+    margin: 0 0 0 auto !important;
     cursor: pointer !important;
     float: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: normal !important;
   }
 
   header .navbar-toggle .icon-bar {
@@ -676,13 +731,25 @@ header .navbar {
     width: 20px !important;
     height: 2px !important;
     border-radius: 1px !important;
-    margin-top: 4px !important;
-  }
-  header .navbar-toggle .icon-bar:first-child {
-    margin-top: 0 !important;
+    margin: 0 !important;
+    transition: all 0.3s ease !important;
   }
 
-  header .navbar-collapse {
+  header .navbar-toggle.is-open .icon-bar:nth-child(2) {
+    transform: rotate(45deg) translate(4px, 4px) !important;
+  }
+
+  header .navbar-toggle.is-open .icon-bar:nth-child(3) {
+    opacity: 0 !important;
+  }
+
+  header .navbar-toggle.is-open .icon-bar:nth-child(4) {
+    transform: rotate(-45deg) translate(4px, -4px) !important;
+  }
+
+  header .navbar-collapse,
+  header .container .navbar-collapse,
+  header .container > .navbar-collapse {
     position: absolute !important;
     top: 64px !important;
     left: 0 !important;
@@ -693,7 +760,7 @@ header .navbar {
     border-bottom: 1px solid rgba(197, 157, 95, 0.25) !important;
     padding: 20px !important;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.95) !important;
-    max-height: 80vh !important;
+    max-height: calc(100vh - 64px) !important;
     overflow-y: auto !important;
     float: none !important;
     z-index: 99999 !important;
@@ -706,6 +773,11 @@ header .navbar {
 
   header .navbar-collapse.in {
     display: block !important;
+  }
+
+  header .navbar.affix .navbar-nav > li > a,
+  header .navbar.affix .module .module-icon i {
+    color: #e5dfd3 !important;
   }
 
   header .nav.navbar-nav {
@@ -880,7 +952,7 @@ header .navbar {
     margin-bottom: 0;
   }
 
-  .btn {
+  .btn:not(header .btn) {
     width: 100% !important;
     text-align: center !important;
     display: flex !important;

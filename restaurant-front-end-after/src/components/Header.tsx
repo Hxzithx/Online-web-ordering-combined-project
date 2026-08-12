@@ -79,66 +79,18 @@ export const Header: React.FC = () => {
 
             <button
               type="button"
-              className="navbar-toggle"
+              className={`navbar-toggle ${mobileMenuOpen ? 'is-open' : ''}`}
               onClick={(e) => {
                 e.stopPropagation();
                 setMobileMenuOpen(!mobileMenuOpen);
               }}
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle navigation"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '4px',
-                background: 'rgba(197, 157, 95, 0.12)',
-                border: '1px solid rgba(197, 157, 95, 0.5)',
-                borderRadius: '6px',
-                padding: '8px 10px',
-                cursor: 'pointer',
-                marginLeft: 'auto',
-                outline: 'none',
-                boxShadow: 'none',
-              }}
             >
               <span className="sr-only">Toggle navigation</span>
-              <span
-                className="icon-bar"
-                style={{
-                  display: 'block',
-                  width: '20px',
-                  height: '2px',
-                  background: '#c59d5f',
-                  borderRadius: '1px',
-                  transition: 'all 0.3s ease',
-                  transform: mobileMenuOpen ? 'rotate(45deg) translate(4px, 4px)' : 'none',
-                }}
-              ></span>
-              <span
-                className="icon-bar"
-                style={{
-                  display: 'block',
-                  width: '20px',
-                  height: '2px',
-                  background: '#c59d5f',
-                  borderRadius: '1px',
-                  transition: 'all 0.3s ease',
-                  opacity: mobileMenuOpen ? 0 : 1,
-                }}
-              ></span>
-              <span
-                className="icon-bar"
-                style={{
-                  display: 'block',
-                  width: '20px',
-                  height: '2px',
-                  background: '#c59d5f',
-                  borderRadius: '1px',
-                  transition: 'all 0.3s ease',
-                  transform: mobileMenuOpen ? 'rotate(-45deg) translate(4px, -4px)' : 'none',
-                }}
-              ></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
             </button>
           </div>
 
