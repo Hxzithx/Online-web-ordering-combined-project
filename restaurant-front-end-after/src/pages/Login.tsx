@@ -105,7 +105,8 @@ export const Login: React.FC = () => {
     // Redirects to backend Socialite route which opens official Google account chooser window
     const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/';
     const cleanBaseUrl = apiBaseUrl.endsWith('/') ? apiBaseUrl : `${apiBaseUrl}/`;
-    window.location.href = `${cleanBaseUrl}api/auth/google`;
+    const frontendUrl = encodeURIComponent(window.location.origin);
+    window.location.href = `${cleanBaseUrl}api/auth/google?frontend_url=${frontendUrl}`;
   };
 
   return (

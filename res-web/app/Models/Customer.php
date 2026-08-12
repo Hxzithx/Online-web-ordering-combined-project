@@ -30,4 +30,12 @@ class Customer extends Model
         'is_synced',
         'sync_date_time',
     ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }

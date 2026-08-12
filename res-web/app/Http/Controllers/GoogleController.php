@@ -13,16 +13,24 @@ class GoogleController extends Controller
     /**
      * Redirect customer to Google's official OAuth authorization window.
      */
-    public function redirectToGoogle()
+    public function redirectToGoogle(Request $request)
     {
-        return Socialite::driver('google')->stateless()->redirect();
+        $frontendUrl = $this->resolveFrontendUrl($request->query('frontend_url'));
+        $state       = base64_encode(json_encode(['frontend' => $frontendUrl]));
+
+        return Socialite::driver('google')
+            ->stateless()
+            ->with(['state' => $state])
+            ->redirect();
     }
 
     /**
      * Handle callback redirect from Google's official OAuth window.
      */
-    public function handleGoogleCallback()
+    public function handleGoogleCallback(Request $request)
     {
+        $frontendUrl = $this->resolveFrontendUrlFromState($request->query('state'));
+
         try {
             $googleUser = Socialite::driver('google')->stateless()->user();
 
@@ -64,12 +72,10 @@ class GoogleController extends Controller
             $customer->tokens()->delete();
             $token = $customer->createToken('google_token')->plainTextToken;
 
-            $frontendUrl = env('FRONTEND_URL', 'http://localhost:5173');
-            $userJson    = urlencode(json_encode($customer));
+            $userJson = urlencode(json_encode($customer->toArray()));
 
             return redirect("{$frontendUrl}/login?token={$token}&user={$userJson}");
         } catch (\Exception $e) {
-            $frontendUrl = env('FRONTEND_URL', 'http://localhost:5173');
             return redirect("{$frontendUrl}/login?error=" . urlencode($e->getMessage()));
         }
     }
@@ -131,5 +137,85 @@ class GoogleController extends Controller
                 'error'   => $e->getMessage(),
             ], 500);
         }
+    }
+
+    /**
+     * Resolve a safe frontend URL for OAuth redirects.
+     */
+    private function resolveFrontendUrl(?string $requestedUrl = null): string
+    {
+        $defaultUrl = rtrim((string) config('app.frontend_url', config('app.url')), '/');
+
+        if (empty($requestedUrl)) {
+            return $defaultUrl;
+        }
+
+        $requestedUrl = rtrim($requestedUrl, '/');
+
+        if ($this->isAllowedFrontendUrl($requestedUrl)) {
+            return $requestedUrl;
+        }
+
+        return $defaultUrl;
+    }
+
+    /**
+     * Extract the frontend URL encoded in the OAuth state parameter.
+     */
+    private function resolveFrontendUrlFromState(?string $state): string
+    {
+        $defaultUrl = rtrim((string) config('app.frontend_url', config('app.url')), '/');
+
+        if (empty($state)) {
+            return $defaultUrl;
+        }
+
+        try {
+            $decoded = json_decode(base64_decode($state), true);
+
+            if (!empty($decoded['frontend']) && $this->isAllowedFrontendUrl($decoded['frontend'])) {
+                return rtrim($decoded['frontend'], '/');
+            }
+        } catch (\Exception $e) {
+            // Fall back to configured frontend URL.
+        }
+
+        return $defaultUrl;
+    }
+
+    /**
+     * Prevent open redirects by only allowing known frontend origins.
+     */
+    private function isAllowedFrontendUrl(string $url): bool
+    {
+        $url = rtrim($url, '/');
+
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            return false;
+        }
+
+        $allowedUrls = array_filter([
+            config('app.frontend_url'),
+            config('app.url'),
+        ]);
+
+        foreach ($allowedUrls as $allowedUrl) {
+            if ($url === rtrim((string) $allowedUrl, '/')) {
+                return true;
+            }
+        }
+
+        $appHost = parse_url((string) config('app.url'), PHP_URL_HOST);
+        $reqHost = parse_url($url, PHP_URL_HOST);
+
+        if ($appHost && $reqHost === $appHost) {
+            return true;
+        }
+
+        if (app()->environment('local')) {
+            return in_array($reqHost, ['localhost', '127.0.0.1'], true);
+        }
+
+        return false;
     }
 }
