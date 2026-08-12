@@ -54,7 +54,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = async () => {
-    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://${import.meta.env.VITE_API_BASE_URL}/';
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/';
     try {
       if (token) {
         await fetch(`${apiBaseUrl}api/logout`, {

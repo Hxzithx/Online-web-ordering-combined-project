@@ -14,7 +14,7 @@ export const getAvatarUrl = (avatarPath?: string | null): string | null => {
   ) {
     return avatarPath;
   }
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://${import.meta.env.VITE_API_BASE_URL}/';
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/';
   const cleanBase = apiBaseUrl.endsWith('/') ? apiBaseUrl : `${apiBaseUrl}/`;
   const cleanPath = avatarPath.startsWith('/') ? avatarPath.substring(1) : avatarPath;
 
