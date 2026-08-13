@@ -1,11 +1,13 @@
 <?php
 
-namespace app\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderType;
 use App\Models\Table;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -42,6 +44,10 @@ class OrderController extends Controller implements HasMiddleware
              'cancelledBy',
              'orderItems.item'
            ]);
+
+           if ($this->isCustomerAccount($request->user())) {
+              $query->where('customer_id', (string) $request->user()->id);
+           }
 
            //filter by order number
            if($request->has('order_number')){
@@ -162,18 +168,20 @@ class OrderController extends Controller implements HasMiddleware
 
            DB::beginTransaction();
 
+           $ownership = $this->resolveOrderOwnership($request, $fields);
+
            //create order 
            $orderData = [
               'branch_id' => $fields['branch_id'] ?? null,
               'order_number' => $fields['order_number'],
               'table_id' => $fields['table_id'] ?? null,
               'table_merge_id' => $fields['table_merge_id'] ?? null,
-              'user_id' => $request->user()->id,
-              'opened_by' => $request->user()->id,
+              'user_id' => $ownership['user_id'],
+              'opened_by' => $ownership['opened_by'],
               'steward_id' => $fields['steward_id'] ?? null,
               'order_type_id' => $fields['order_type_id'],
-              'customer_name' => $fields['customer_name'] ?? null,
-              'customer_id' => $fields['customer_id'] ?? null,
+              'customer_name' => $ownership['customer_name'],
+              'customer_id' => $ownership['customer_id'],
               'status' => $fields['status'] ?? 'pending',
               'reserved_seats' => $fields['reserved_seats'] ?? null,
               'discount_amount' => $fields['discount_amount'] ?? 0,
@@ -647,7 +655,7 @@ class OrderController extends Controller implements HasMiddleware
             $order->update([
                 'status' => 'cancelled',
                 'cancelled_at' => now(),
-                'cancelled_by' => $request->user()->id,
+                'cancelled_by' => $this->staffUserId($request),
                 'cancel_reason' => $request->cancel_reason ?? 'Cancelled by customer'
             ]);
 
@@ -701,5 +709,60 @@ class OrderController extends Controller implements HasMiddleware
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    /**
+     * Detect whether the authenticated account is an online customer.
+     */
+    private function isCustomerAccount($authUser): bool
+    {
+        if (!$authUser) {
+            return false;
+        }
+
+        if ($authUser instanceof Customer) {
+            return true;
+        }
+
+        if (method_exists($authUser, 'getTable') && $authUser->getTable() === 'customers') {
+            return true;
+        }
+
+        return !User::whereKey($authUser->id)->exists();
+    }
+
+    /**
+     * Resolve staff user id, or null for online customers.
+     */
+    private function staffUserId(Request $request): ?int
+    {
+        $authUser = $request->user();
+
+        return $this->isCustomerAccount($authUser) ? null : $authUser->id;
+    }
+
+    /**
+     * Map authenticated account to order ownership fields.
+     */
+    private function resolveOrderOwnership(Request $request, array $fields = []): array
+    {
+        $authUser = $request->user();
+
+        if ($this->isCustomerAccount($authUser)) {
+            return [
+                'user_id' => null,
+                'opened_by' => null,
+                'customer_id' => (string) $authUser->id,
+                'customer_name' => $fields['customer_name']
+                    ?? trim("{$authUser->first_name} {$authUser->last_name}"),
+            ];
+        }
+
+        return [
+            'user_id' => $authUser->id,
+            'opened_by' => $authUser->id,
+            'customer_id' => $fields['customer_id'] ?? null,
+            'customer_name' => $fields['customer_name'] ?? null,
+        ];
     }
 }

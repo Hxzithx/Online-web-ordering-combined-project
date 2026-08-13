@@ -209,7 +209,9 @@ section#page-title .breadcrumb {
   gap: 8px !important;
   background: transparent !important;
   padding: 0 !important;
-  margin: 15px 0 0 0 !important;
+  margin: 25px 0 0 0 !important;
+  position: relative !important;
+  bottom: auto !important;
   list-style: none !important;
   border-radius: 0 !important;
 }
