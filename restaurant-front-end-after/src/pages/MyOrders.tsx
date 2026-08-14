@@ -136,17 +136,17 @@ export const MyOrders: React.FC = () => {
     }
 
     return (
-      <span 
-        style={{ 
-          display: 'inline-block', 
-          padding: '4px 10px', 
-          borderRadius: '12px', 
-          fontSize: '11px', 
-          textTransform: 'uppercase', 
+      <span
+        style={{
+          display: 'inline-block',
+          padding: '4px 10px',
+          borderRadius: '12px',
+          fontSize: '11px',
+          textTransform: 'uppercase',
           fontWeight: 'bold',
           letterSpacing: '1px',
           backgroundColor,
-          color 
+          color
         }}
       >
         {status}
@@ -165,13 +165,14 @@ export const MyOrders: React.FC = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="title title-4 text-center">
-                <div className="title--content" style={{ marginBottom: '25px' }}>
+                <div className="title--content">
                   <div className="title--subtitle">History</div>
                   <div className="title--heading">
-                    <h1 style={{ marginBottom: '15px' }}>My Orders</h1>
+                    <h1>My Orders</h1>
                   </div>
                 </div>
-                <ol className="breadcrumb" style={{ position: 'relative', bottom: 'auto', marginTop: '25px' }}>
+                <br/>
+                <ol className="breadcrumb">
                   <li><Link to="/home">Home</Link></li>
                   <li className="active">My Orders</li>
                 </ol>
