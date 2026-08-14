@@ -144,14 +144,6 @@ export const Header: React.FC = () => {
               </li>
             </ul>
 
-            {/* Social Icons */}
-            <div className="module module-social">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer"><i className="fa fa-facebook"></i></a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer"><i className="fa fa-twitter"></i></a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer"><i className="fa fa-instagram"></i></a>
-              <a href="https://tripadvisor.com" target="_blank" rel="noreferrer"><i className="fa fa-tripadvisor"></i></a>
-            </div>
-
             {/* Reservation Button */}
             <div className="module module-reservation">
               <Link to="/reservation" className="btn btn-popup">
@@ -443,6 +435,14 @@ export const Header: React.FC = () => {
                 </Link>
               </div>
             )}
+
+            {/* ── Social Icons (Bottom) ── */}
+            <div className="module module-social">
+              <a href="https://facebook.com" target="_blank" rel="noreferrer"><i className="fa fa-facebook"></i></a>
+              <a href="https://twitter.com" target="_blank" rel="noreferrer"><i className="fa fa-twitter"></i></a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer"><i className="fa fa-instagram"></i></a>
+              <a href="https://tripadvisor.com" target="_blank" rel="noreferrer"><i className="fa fa-tripadvisor"></i></a>
+            </div>
 
           </div>
         </div>
